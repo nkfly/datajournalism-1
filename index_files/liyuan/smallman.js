@@ -70,11 +70,13 @@ $(document).ready(function(){
     'container':'body'})
 			.hover(function(){
 				var type = $(this).attr("data-type");
-				$( "img[data-type='"+type+"']" ).removeClass("smallman").addClass("smallman-bigger");
+				//$( "img[data-type='"+type+"']" ).removeClass("smallman").addClass("smallman-bigger");
+				$( "img[data-type='"+type+"']" ).css("background-color", "rgb(55,55,55)");
 
 			}, function(){
 				var type = $(this).attr("data-type");
-				$( "img[data-type='"+type+"']" ).removeClass("smallman-bigger").addClass("smallman");
+				$( "img[data-type='"+type+"']" ).css("background-color", "transparent");
+				//$( "img[data-type='"+type+"']" ).removeClass("smallman-bigger").addClass("smallman");
 			});
 			smallmanId++;
 		}
