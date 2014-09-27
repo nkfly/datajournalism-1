@@ -1,0 +1,40 @@
+img.smallman {
+	display:inline-block;
+	width:24px !important;
+	height:51px !important;
+	padding-left: 3px;
+	padding-right: 3px;
+	cursor:pointer;
+	-webkit-transition: all 1s ease;
+     -moz-transition: all 1s ease;
+       -o-transition: all 1s ease;
+      -ms-transition: all 1s ease;
+          transition: all 1s ease;
+
+}
+
+.smallman-bigger{
+	display:inline-block;
+	width:26px !important;
+	height:51px !important;
+	padding-left: 3px;
+	padding-right: 3px;
+	cursor:pointer;
+	-webkit-transition: all 0.5s ease;
+     -moz-transition: all 0.5s ease;
+       -o-transition: all 1s ease;
+      -ms-transition: all 1s ease;
+          transition: all 1s ease;
+}
+
+
+
+div.tooltip-inner{
+	max-width: 550px;
+
+}
+.tooltip.top{
+	font-size:20px;
+	white-space: nowrap;
+
+}

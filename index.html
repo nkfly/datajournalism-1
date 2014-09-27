@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<!-- saved from url=(0049)http://datajournalism.ntu.edu.tw/post/89535832028 -->
+<html class="no-js" lang="en"><script src="./index_files/rapid-3.18.1.js"></script><script>(function main() {
+    // Create enabled event
+    function fireEnabledEvent() {
+        // If gli exists, then we are already present and shouldn't do anything
+        if (!window.gli) {
+            setTimeout(function () {
+                var enabledEvent = document.createEvent("Event");
+                enabledEvent.initEvent("WebGLEnabledEvent", true, true);
+                document.dispatchEvent(enabledEvent);
+            }, 0);
+        } else {
+            //console.log("WebGL Inspector already embedded on the page - disabling extension");
+        }
+    };
+
+    // Grab the path root from the extension
+    document.addEventListener("WebGLInspectorReadyEvent", function (e) {
+        var pathElement = document.getElementById("__webglpathroot");
+        if (window["gliloader"]) {
+            gliloader.pathRoot = pathElement.innerText;
+        } else {
+            // TODO: more?
+            window.gliCssUrl = pathElement.innerText + "gli.all.css";
+        }
+    }, false);
+
+    // Rewrite getContext to snoop for webgl
+    var originalGetContext = HTMLCanvasElement.prototype.getContext;
+    if (!HTMLCanvasElement.prototype.getContextRaw) {
+        HTMLCanvasElement.prototype.getContextRaw = originalGetContext;
+    }
+    HTMLCanvasElement.prototype.getContext = function () {
+        var ignoreCanvas = this.internalInspectorSurface;
+        if (ignoreCanvas) {
+            return originalGetContext.apply(this, arguments);
+        }
+
+        var result = originalGetContext.apply(this, arguments);
+        if (result == null) {
+            return null;
+        }
+
+        var contextNames = ["moz-webgl", "webkit-3d", "experimental-webgl", "webgl", "3d"];
+        var requestingWebGL = contextNames.indexOf(arguments[0]) != -1;
+        if (requestingWebGL) {
+            // Page is requesting a WebGL context!
+            fireEnabledEvent(this);
+
+            // If we are injected, inspect this context
+            if (window.gli) {
+                if (gli.host.inspectContext) {
+                    // TODO: pull options from extension
+                    result = gli.host.inspectContext(this, result);
+                    // NOTE: execute in a timeout so that if the dom is not yet
+                    // loaded this won't error out.
+                    window.setTimeout(function() {
+                        var hostUI = new gli.host.HostUI(result);
+                        result.hostUI = hostUI; // just so we can access it later for debugging
+                    }, 0);
+                }
+            }
+        }
+
+        return result;
+    };
+})();</script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script>var __pbpa = true;</script><script>var translated_warning_string = 'Warning: Never enter your Tumblr password unless \u201chttps://www.tumblr.com/login\u201d\x0ais the address in your web browser.\x0a\x0aYou should also see a green \u201cTumblr, Inc.\u201d identification in the address bar.\x0a\x0aSpammers and other bad guys use fake forms to steal passwords.\x0a\x0aTumblr will never ask you to log in from a user\u2019s blog.\x0a\x0aAre you absolutely sure you want to continue?';</script><script type="text/javascript" language="javascript" src="./index_files/pre_tumblelog.js"></script>
+
+
+
+
+
+
+
+   <!-- Basic Page Settings -->
+
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+   <title>datajournalismNTU - 政府的統計薪資數據與民眾認知不符
+
+記者陳貞樺、藍婉芸、李竹君、陳瑋宗／報導
+
+...</title>
+
+   <meta name="author" content="datajournalismNTU">
+
+   <meta name="tumblr-theme" content="37441">
+
+   
+
+   <link rel="shortcut icon" href="http://assets.tumblr.com/images/default_avatar/cone_closed_128.png">
+   <link rel="apple-touch-icon" href="http://assets.tumblr.com/images/default_avatar/cone_closed_128.png">
+   <link rel="alternate" type="application/rss+xml" href="http://datajournalism.ntu.edu.tw/rss">
+
+
+
+
+   <!-- Main Style Settings -->
+
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   
+   
+   <link href="./index_files/css" rel="stylesheet" type="text/css">
+   
+
+   <link rel="stylesheet" href="http://static.tumblr.com/e6lc7yi/Wswn0wj9c/precrafted-social.css">
+   <link rel="stylesheet" href="https://dl.dropboxusercontent.com/u/21495695/gobig-styles.css">
+
+
+
+
+   <!-- Custom Options -->
+
+
+   <!-- Custom Colors -->
+   <meta name="color:Header Title" content="#ffffff">
+   <meta name="color:Header Overlay" content="#000000">
+   <meta name="color:Description" content="#7f8c8d">
+   <meta name="color:Nav Background" content="#ffffff">
+   <meta name="color:Post Background" content="#ffffff">
+   <meta name="color:Post Titles" content="#444444">
+   <meta name="color:Post Bottom" content="#bdc3c7">
+   <meta name="color:Text" content="#7f8c8d">
+   <meta name="color:Link" content="#529ECC">
+   <meta name="color:Link Hover" content="#2c3e50">
+
+   
+   <!-- Custom Images -->
+   <meta name="image:Background" content="">
+   <meta name="image:Logo" content="">
+
+   <meta name="image:Header 2" content="">
+   <meta name="image:Header 3" content="">
+   <meta name="image:Header 4" content="">
+   <meta name="image:Header 5" content="">
+
+
+   <!-- Custom Text -->
+   <meta name="text:Header Overlay Opacity" content="0.5">
+   <meta name="text:Header Height Percent" content="100">
+   <meta name="text:Header Height Permalink Percent" content="50">
+   <meta name="text:Header Scroll Prompt" content="">
+
+   <meta name="text:Title Font Size" content="68">
+   <meta name="text:Title Border Width" content="6">
+   <meta name="text:Title Letter Spacing" content="2">
+
+   <meta name="text:Single Column Width" content="">
+   <meta name="text:Grid Spacing" content="15">
+
+   <meta name="text:Load More" content="Load More Posts">
+   <meta name="text:Load More Loading" content="Loading...">
+   <meta name="text:Load More End" content="No More Posts">
+   <meta name="text:Footer Text" content="Your custom footer message">
+
+   <meta name="text:Google Analytics Code" content="">
+   <meta name="text:Disqus Shortname" content="">
+
+   <meta name="text:Font Embed Code" content="">
+   <meta name="text:Font Family Logo" content="">
+   <meta name="text:Font Family Titles" content="">
+   <meta name="text:Font Family Body" content="">
+
+   <meta name="text:URL Twitter" content="">
+   <meta name="text:URL Facebook" content="">
+   <meta name="text:URL Tumblr" content="">
+   <meta name="text:URL Website" content="">
+   <meta name="text:URL Google" content="">
+   <meta name="text:URL Linkedin" content="">
+   <meta name="text:URL Foursquare" content="">
+   <meta name="text:URL Skype" content="">
+   <meta name="text:URL Email" content="">
+   <meta name="text:URL Instagram" content="">
+   <meta name="text:URL Flickr" content="">
+   <meta name="text:URL 500px" content="">
+   <meta name="text:URL Camera" content="">
+   <meta name="text:URL Eye" content="">
+   <meta name="text:URL Pinterest" content="">
+   <meta name="text:URL Heart" content="">
+   <meta name="text:URL Youtube" content="">
+   <meta name="text:URL Vimeo" content="">
+   <meta name="text:URL Ebay" content="">
+   <meta name="text:URL Store" content="">
+   <meta name="text:URL Apple" content="">
+   <meta name="text:URL Googleplay" content="">
+   <meta name="text:URL Dribbble" content="">
+   <meta name="text:URL Behance" content="">
+   <meta name="text:URL Github" content="">
+   <meta name="text:URL Forrst" content="">
+   <meta name="text:URL Quora" content="">
+   <meta name="text:URL Travel" content="">
+   <meta name="text:URL Lastfm" content="">
+   <meta name="text:URL Rdio" content="">
+   <meta name="text:URL Spotify" content="">
+   <meta name="text:URL Soundcloud" content="">
+   <meta name="text:URL RSS" content="">
+
+
+   <!-- Custom Choices -->
+   <meta name="if:Tile Background" content="0">
+
+   <meta name="if:Header Overlay" content="1">
+   <meta name="if:Header Parallax" content="1">
+   <meta name="if:Header Avatar" content="0">
+
+   <meta name="if:Sticky Menu" content="0">
+   <meta name="if:Show Menu Internally" content="0">
+   <meta name="if:Show Archive Link" content="1">
+   <meta name="if:Show Search" content="1">
+
+   <meta name="if:Single Column Layout" content="0">
+   
+   <meta name="if:White Icons" content="0">
+   <meta name="if:Show Meta On Home" content="0">
+   <meta name="if:Show Group Author" content="0">
+   <meta name="if:Photos Link To Permalink" content="1">
+
+   <meta name="select:Pagination" content="pagination_load-more" title="Load More">
+   <meta name="select:Pagination" content="pagination_standard" title="Standard">
+   <meta name="select:Pagination" content="pagination_infinite-scroll" title="Infinite Scroll">
+
+
+
+
+   <!-- Custom CSS -->
+
+   <style type="text/css">
+
+		body {
+			background: #FAFAFA;
+			color: #7f8c8d;
+		}
+
+		
+
+		
+
+		
+		header {
+			height: 100%;
+		}
+		
+
+		
+		.permalink header,
+		.tag header,
+		.search header {
+			height: 50%;
+		}
+		
+
+		header .header-overlay {
+			background: #000000;
+			opacity: 0.3;
+		}
+
+		header .center .logo h1 a {
+			font-family: 'Gibson', sans-serif;
+			font-weight: bold;
+			color: #ffffff;
+			
+			
+			border: 6px solid #ffffff;
+			
+
+			
+			letter-spacing: 2px;
+			
+		}
+
+		header .header-prompt {
+			color: #ffffff;
+		}
+
+		article.type_description .article-content .description {
+			color: #7f8c8d
+		}
+
+		article .article-content {
+			background: #ffffff;
+			border-color: #bdc3c7;
+		}
+        /*article .article-content img {
+            padding: 4px;
+            line-height: 1.42857143;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }*/
+		.single-post article .article-content {
+			border-color: #bdc3c7;
+		}
+
+		h1, h2, h3, h4, h5,
+		article.type_quote .quote,
+		article h2 a {
+			color: #444444;
+		}
+        
+		a {
+			color: #529ECC;
+		}
+
+		a:hover,
+		article h2 a:hover {
+			color: #2c3e50;
+		}
+
+		nav {
+			background: #ffffff;
+		}
+
+		nav ul li a,
+		nav .search .search-toggle,
+		footer .type_pagination .load-more,
+		footer .type_pagination .scroll-top,
+		footer .type_pagination .pagination a,
+		footer .post-nav a {
+			background: #ffffff;
+			color: #529ECC;
+		}
+
+		nav ul li a:hover,
+		nav .search .search-toggle:hover,
+		nav.search-on .search .search-toggle,
+		footer .type_pagination .load-more:hover,
+		footer .type_pagination .scroll-top:hover,
+		footer .type_pagination .pagination a:hover,
+		footer .post-nav a:hover {
+			background: #529ECC;
+			color: #ffffff;
+		}
+
+		nav .search input {
+			color: #7f8c8d;
+		}
+
+		nav .search input:focus {
+			color: #529ECC;
+		}
+
+		article blockquote, article.type_chat .line, article.type_answer .answer-person {
+			border-color: #FAFAFA;
+		}
+
+		article.type_link .the-link {
+			background: #529ECC;
+			color: #ffffff;
+		}
+
+		article.type_link .the-link:hover {
+			background: #2c3e50;
+		}
+
+		::-moz-selection { background: #529ECC; color: #ffffff; text-shadow: none; }
+		::selection { background: #529ECC; color: #ffffff; text-shadow: none; }
+
+		
+
+		
+		@media only screen and (min-width: 768px) {
+			
+			
+			header .center .logo h1 a {
+				font-size: 68px;
+			}
+			
+
+			
+			section {
+				padding-left: 15px;
+				padding-right: 15px;
+			}
+			section.intro {
+				padding-top: 15px;
+				padding-bottom: 15px;
+			}
+			article {
+				padding: 15px;
+			}
+			
+			
+		}
+		
+
+		
+
+		
+        
+        /*float*/
+        .floatleft { float: left; margin: 0px 5px 5px 0px; width:45%;}
+        .floatright { float: right; margin: 0px 0px 5px 5px; width:45%;}
+        .clearboth { clear: both; }
+        .rectangle {display:block; width:100%; height:50px;}
+        
+        
+        /*image center*/
+        .image_center {
+            width: 800px; 
+            margin: 0 auto;
+            text-align:center;
+        }
+   </style>
+
+   <style type="text/css">
+
+	  
+
+   </style>
+
+
+
+   
+
+    
+<link rel="alternate" href="android-app://com.tumblr/tumblr/x-callback-url/blog?blogName=datajournalismntu%26postID=89535832028">
+<script src="./index_files/tumblelog.js"></script><style type="text/css" id="tumblr_teaser_follow_css">
+#tumblr_teaser_follow {
+display: block;
+opacity: 1;
+visibility: hidden;
+position: fixed;
+bottom: 0px;
+right: 0px;
+width: 1px;
+height: 1px;
+z-index: 2147483647;
+}
+#tumblr_teaser_follow.open {
+visibility: visible;
+width: 310px;
+height: 110px;
+}
+</style><style type="text/css" id="tumblr_iframe_css">
+.tumblr_controls {
+position: absolute;
+top: 0px;
+right: 0px;
+display: block;
+opacity: 1;
+width: 1px;
+height: 1px;
+z-index: 2147483647;
+visibility: hidden;
+pointer-events: none;
+}
+.tumblr_controls.visible {
+visibility: visible;
+pointer-events: all;
+}
+.tumblr_controls.sticky {
+position: fixed;
+}
+.tumblr_controls.transition {
+-webkit-transition: top 0.1s ease;
+-moz-transition: top 0.1s ease;
+-ms-transition: top 0.1s ease;
+-o-transition: top 0.1s ease;
+transition: top 0.1s ease;
+}
+iframe#tumblr_controls.tumblr_controls.sticky.transition {
+-webkit-animation: tumblr_controls_fade_in 0.3s 0.2s linear 1 both;
+-moz-animation: tumblr_controls_fade_in 0.3s 0.2s linear 1 both;
+-ms-animation: tumblr_controls_fade_in 0.3s 0.2s linear 1 both;
+-o-animation: tumblr_controls_fade_in 0.3s 0.2s linear 1 both;
+animation: tumblr_controls_fade_in 0.3s 0.2s linear 1 both;
+top: 0 !important;
+}
+.tumblr_controls.sticky.transition {
+-webkit-animation: tumblr_controls_fade_in 0.3s 0.2s linear 1 both;
+-moz-animation: tumblr_controls_fade_in 0.3s 0.2s linear 1 both;
+-ms-animation: tumblr_controls_fade_in 0.3s 0.2s linear 1 both;
+-o-animation: tumblr_controls_fade_in 0.3s 0.2s linear 1 both;
+animation: tumblr_controls_fade_in 0.3s 0.2s linear 1 both;
+top: 0 !important;
+}
+.tumblr_controls.flash_fix {
+visibility: hidden !important;
+}
+#tumblr_controls {
+width: 1px;
+height: 1px;
+}
+@-webkit-keyframes tumblr_controls_fade_in {
+0% {
+opacity: 0;
+}
+100% {
+opacity: 1;
+}
+}
+@-moz-keyframes tumblr_controls_fade_in {
+0% {
+opacity: 0;
+}
+100% {
+opacity: 1;
+}
+}
+@-ms-keyframes tumblr_controls_fade_in {
+0% {
+opacity: 0;
+}
+100% {
+opacity: 1;
+}
+}
+@-o-keyframes tumblr_controls_fade_in {
+0% {
+opacity: 0;
+}
+100% {
+opacity: 1;
+}
+}
+@keyframes tumblr_controls_fade_in {
+0% {
+opacity: 0;
+}
+100% {
+opacity: 1;
+}
+}
+</style>
+<link rel="stylesheet" type="text/css" href="./index_files/stylesheet.css">
+<meta http-equiv="x-dns-prefetch-control" content="off">
+<meta name="keywords" content="藍婉芸,社會,李竹君,陳貞樺,陳瑋宗">
+
+<!-- BEGIN TUMBLR FACEBOOK OPENGRAPH TAGS --><!-- If you'd like to specify your own Open Graph tags, define the og:url and og:title tags in your theme's HTML. --><!-- Read more: http://ogp.me/ --><meta property="fb:app_id" content="48119224995"><meta property="og:site_name" content=""><meta property="og:title" content=""><meta property="og:url" content="http://datajournalism.ntu.edu.tw/post/89535832028"><meta property="og:description" content="政府的統計薪資數據與民眾認知不符 “ 記者陳貞樺、藍婉芸、李竹君、陳瑋宗／報導..."><meta property="og:determiner" content="a"><meta property="og:type" content="tumblr-feed:photo"><meta property="og:image" content="http://38.media.tumblr.com/967a4445bfc7298967d9064002fa3f92/tumblr_n7k9902WJx1tz0k5lo1_1280.jpg"><meta property="al:ios:url" content="tumblr://x-callback-url/blog?blogName=datajournalismntu&amp;postID=89535832028"><meta property="al:ios:app_name" content="Tumblr"><meta property="al:ios:app_store_id" content="305343404"><meta property="al:android:url" content="tumblr://x-callback-url/blog?blogName=datajournalismntu&amp;postID=89535832028"><meta property="al:android:app_name" content="Tumblr"><meta property="al:android:package" content="com.tumblr"><!-- END TUMBLR FACEBOOK OPENGRAPH TAGS -->
+
+
+<!-- TWITTER TAGS --><meta charset="utf-8"><meta name="twitter:card" content="photo"><meta name="twitter:description" content="政府的統計薪資數據與民眾認知不符 “ 記者陳貞樺、藍婉芸、李竹君、陳瑋宗／報導..."><meta name="twitter:image" content="http://33.media.tumblr.com/967a4445bfc7298967d9064002fa3f92/tumblr_n7k9902WJx1tz0k5lo1_500.jpg"><meta name="twitter:url" content="http://datajournalism.ntu.edu.tw/post/89535832028"><meta name="twitter:site" content="tumblr"><meta name="twitter:app:name:iphone" content="Tumblr"><meta name="twitter:app:name:ipad" content="Tumblr"><meta name="twitter:app:name:googleplay" content="Tumblr"><meta name="twitter:app:id:iphone" content="305343404"><meta name="twitter:app:id:ipad" content="305343404"><meta name="twitter:app:id:googleplay" content="com.tumblr"><meta name="twitter:app:url:iphone" content="tumblr://x-callback-url/blog?blogName=datajournalismntu&amp;postID=89535832028&amp;referrer=twitter-cards"><meta name="twitter:app:url:ipad" content="tumblr://x-callback-url/blog?blogName=datajournalismntu&amp;postID=89535832028&amp;referrer=twitter-cards"><meta name="twitter:app:url:googleplay" content="tumblr://x-callback-url/blog?blogName=datajournalismntu&amp;postID=89535832028&amp;referrer=twitter-cards">
+
+<script type="text/javascript" async="" src="./index_files/embed.js"></script>
+<!-- Li-Yuan Custom -->
+<link rel="stylesheet" type="text/css" href="./index_files/liyuan/smallman.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+<!-- Li-Yuan Custom -->
+
+</head>
+
+
+
+<body class="permalink">
+
+<header class="on">
+
+	<div class="header-image parallax" style="transform: translate3d(0px, 0px, 0px); background-image: url(http://static.tumblr.com/499854848598ce5224fd5f6659f5dc0d/kujbfiq/y66n6w5qy/tumblr_static_a72rwded8o8o4g40gwg4so8ck.jpg);">
+		<img src="./index_files/tumblr_static_a72rwded8o8o4g40gwg4so8ck.jpg">
+		
+		<div class="header-overlay"></div>
+		
+	</div>
+
+	<div class="center">
+		<div class="logo">
+
+			
+			
+			
+
+			
+			<h1><a href="http://datajournalism.ntu.edu.tw/" title="datajournalismNTU" style="transform: translate3d(0px, 0px, 0px);">datajournalismNTU</a></h1>
+			
+
+			
+
+			
+
+		</div>
+	</div>
+
+
+	
+
+</header>
+
+	
+<nav>
+
+	
+	<div class="search">
+		<div class="search-toggle" title="Search"><i class="social-search"></i></div>
+		<form action="http://datajournalism.ntu.edu.tw/search" method="get">
+			<input id="search-box" type="text" name="q" value="" placeholder="Search...">
+		</form>
+	</div>
+	
+
+	<ul class="main-menu">
+		
+		
+		
+		<!--
+		<li><a href="/archive" title="Archive">Archive</a></li>
+		-->
+		
+		<li><a href="http://datajournalismntu.tumblr.com/datajournalism">Data Journalism</a></li>
+		<li><a href="http://datajournalismntu.tumblr.com/tagged/%E8%A6%96%E8%A6%BA%E4%BD%9C%E5%93%81">視覺作品</a></li>
+		<li><a href="http://datajournalismntu.tumblr.com/tagged/%E8%AA%BF%E6%9F%A5%E5%A0%B1%E5%B0%8E">調查報導</a></li>
+		<li><a href="http://datajournalismntu.tumblr.com/tagged/%E4%BD%9C%E8%80%85%E4%BB%8B%E7%B4%B9">作者介紹</a></li>
+		<li><a href="http://datajournalismntu.tumblr.com/tagged/%E5%BD%B1%E7%89%87%E4%BB%8B%E7%B4%B9">影片介紹</a></li>
+		<!--<li><a href="http://datajournalismntu.tumblr.com/tagged/作品分類">作品分類</a></li>-->
+		<li><a href="http://datajournalismntu.tumblr.com/articlecategory">作品分類</a></li>
+		<li><a href="http://datajournalismntu.tumblr.com/opendata">Open Data</a></li>
+	</ul>
+
+	<ul class="social-menu">
+    
+
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</ul>
+
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="the-posts single-post">
+
+	<div class="posts-holder">
+
+
+		
+   
+
+		
+
+		<article id="89535832028" class="type_photo " rel="https://www.tumblr.com/reblog/89535832028/pwEFLDUg">
+
+			<div class="article-content">
+
+
+        <!-- Li-Yuan Custom -->
+        <div id="smallman-graph" class="caption">
+            
+        </div>
+    
+        <!-- Li-Yuan Custom -->
+        
+			 
+			
+
+
+
+			 
+			
+
+			<!-- Photo Post -->
+
+			
+
+			
+			
+			
+			
+			
+			    tags:
+                
+                    <a href="http://datajournalism.ntu.edu.tw/tagged/%E8%A6%96%E8%A6%BA%E4%BD%9C%E5%93%81">#視覺作品</a>
+                
+                    <a href="http://datajournalism.ntu.edu.tw/tagged/%E9%99%B3%E7%91%8B%E5%AE%97">#陳瑋宗</a>
+                
+                    <a href="http://datajournalism.ntu.edu.tw/tagged/%E9%99%B3%E8%B2%9E%E6%A8%BA">#陳貞樺</a>
+                
+                    <a href="http://datajournalism.ntu.edu.tw/tagged/%E6%9D%8E%E7%AB%B9%E5%90%9B">#李竹君</a>
+                
+                    <a href="http://datajournalism.ntu.edu.tw/tagged/%E8%97%8D%E5%A9%89%E8%8A%B8">#藍婉芸</a>
+                
+                    <a href="http://datajournalism.ntu.edu.tw/tagged/%E7%A4%BE%E6%9C%83">#社會</a>
+                
+            
+
+			
+
+
+
+
+			
+
+
+
+			 
+			
+
+
+
+
+			
+
+
+
+
+			
+
+
+
+
+			
+
+
+
+
+			
+
+
+
+
+			
+
+
+
+
+			
+
+
+
+
+			
+
+			<ul class="icons">
+			   
+			   
+			   <li><a href="./index_files/index.html" class="permalink">
+					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" width="14px" height="14px" fill="#000" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
+					<polygon points="100,37.5 62.5,37.5 62.5,0 37.5,0 37.5,37.5 0,37.5 0,62.5 37.5,62.5 37.5,100 62.5,100   62.5,62.5 100,62.5 "></polygon>
+					</svg>
+			   </a></li>
+			   <li><div class="like_button" data-post-id="89535832028" id="like_button_89535832028"><iframe id="like_iframe_89535832028" src="./index_files/like_iframe.htm" scrolling="no" width="16" height="16" frameborder="0" class="like_toggle" allowtransparency="true"></iframe></div></li>
+				<li class="sharer">
+					<i class="social-export"></i>
+					<i class="reblog-icon"><a href="https://www.tumblr.com/reblog/89535832028/pwEFLDUg" class="reblog_button" style="display: block;width:16px;height:16px;"><svg width="100%" height="100%" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000"><path d="M5.01092527,5.99908429 L16.0088498,5.99908429 L16.136,9.508 L20.836,4.752 L16.136,0.083 L16.1360004,3.01110845 L2.09985349,3.01110845 C1.50585349,3.01110845 0.979248041,3.44726568 0.979248041,4.45007306 L0.979248041,10.9999998 L3.98376463,8.30993634 L3.98376463,6.89801007 C3.98376463,6.20867902 4.71892527,5.99908429 5.01092527,5.99908429 Z"></path><path d="M17.1420002,13.2800293 C17.1420002,13.5720293 17.022957,14.0490723 16.730957,14.0490723 L4.92919922,14.0490723 L4.92919922,11 L0.5,15.806 L4.92919922,20.5103758 L5.00469971,16.9990234 L18.9700928,16.9990234 C19.5640928,16.9990234 19.9453125,16.4010001 19.9453125,15.8060001 L19.9453125,9.5324707 L17.142,12.203"></path></svg></a></i>
+					<a href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fdatajournalism.ntu.edu.tw%2Fpost%2F89535832028" class="social-tweets" target="_blank"></a>
+					<a href="http://www.facebook.com/sharer.php?u=http://datajournalism.ntu.edu.tw/post/89535832028" class="social-facebook" target="_blank"></a>
+				</li>
+			   
+			</ul> 	 	 	   
+
+			
+
+			
+			
+			
+
+
+
+
+			
+
+
+			
+
+
+			<div class="post-meta">
+				3 months ago<br>
+				
+				
+			</div>
+
+			
+			<div class="tagged">
+				Tagged: <a href="http://datajournalism.ntu.edu.tw/tagged/%E8%A6%96%E8%A6%BA%E4%BD%9C%E5%93%81">#視覺作品</a> <a href="http://datajournalism.ntu.edu.tw/tagged/%E9%99%B3%E7%91%8B%E5%AE%97">#陳瑋宗</a> <a href="http://datajournalism.ntu.edu.tw/tagged/%E9%99%B3%E8%B2%9E%E6%A8%BA">#陳貞樺</a> <a href="http://datajournalism.ntu.edu.tw/tagged/%E6%9D%8E%E7%AB%B9%E5%90%9B">#李竹君</a> <a href="http://datajournalism.ntu.edu.tw/tagged/%E8%97%8D%E5%A9%89%E8%8A%B8">#藍婉芸</a> <a href="http://datajournalism.ntu.edu.tw/tagged/%E7%A4%BE%E6%9C%83">#社會</a> 
+			</div>
+			
+
+			
+			<div id="disqus_thread" class="disqus"><iframe id="dsq-2" data-disqus-uid="2" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="./index_files/saved_resource.htm" horizontalscrolling="no" verticalscrolling="no" style="width: 100% !important; border: none !important; overflow: hidden !important; height: 318px !important;"></iframe></div>
+			
+			
+			
+
+			
+
+			
+
+			
+
+
+
+			</div>
+
+		</article>
+
+		
+
+	</div>
+
+</section>
+
+
+
+<footer class="individual-footer">
+
+	
+
+	
+	<div class="post-nav">
+		<a href="http://datajournalism.ntu.edu.tw/post/89536170243" class="next" title="Next post"><i class="social-left"></i></a>
+		<a href="http://datajournalism.ntu.edu.tw/post/89535254663" class="prev" title="Previous post"><i class="social-right"></i></a>
+	</div>
+	
+
+	<div class="footer-border">
+
+		<span>Made in NTU</span>
+		<span>© datajournalismNTU 2014</span>
+
+		<!--<div class="credit">
+			<a href="http://precrafted.com" title="Precrafted" target="_blank">Go Big Tumblr Theme by Precrafted</a>
+		</div>-->
+
+	</div>
+
+</footer>
+
+
+
+
+<!-- Javascript Assets -->
+
+<script src="./index_files/jquery.min.js"></script>
+<!-- Li-Yuan -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="./index_files/liyuan/smallman.js"></script>
+
+<!-- Li-Yuan -->
+
+
+<!-- Header Background -->
+
+
+
+
+
+
+
+</body></html>
