@@ -547,12 +547,12 @@ opacity: 1;
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 <script type="text/javascript">
-var map, layer, geocoder;
+var googlemap, layer, geocoder;
 function initialize() {
   var chicago = new google.maps.LatLng(23.973875, 120.982024);
   geocoder = new google.maps.Geocoder();
 
-  map = new google.maps.Map(document.getElementById('map-canvas'), {
+  googlemap = new google.maps.Map(document.getElementById('map-canvas'), {
     center: chicago,
     zoom: 15
   });
@@ -563,7 +563,7 @@ function initialize() {
       from: '1YKMYkHsbLta_rXfGtRrx2N578QYL3hFv1CF8waaF'
     }
   });
-  layer.setMap(map);
+  layer.setMap(googlemap);
 }
 
 $(document).ready(function(){
@@ -592,8 +592,8 @@ function codeAddress() {
   var address = document.getElementById('address').value;
   geocoder.geocode( { 'address': address}, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
-      map.panTo(results[0].geometry.location);
-    map.setZoom(15);
+      googlemap.panTo(results[0].geometry.location);
+    googlemap.setZoom(15);
     } else {
       console.log('Geocode was not successful for the following reason: ' + status);
     }
