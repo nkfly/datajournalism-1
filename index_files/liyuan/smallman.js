@@ -57,13 +57,16 @@ $(document).ready(function(){
 	var officers = [6, 16, 532, 375, 198, 2096, 6, 50, 7851];
 	// mayor, countryHead, countryDelegate, cityCouncilor, countyHead,
 	// countyDelegate, areaHead, areaDelegate, villageHead
-	var totalSmallman = 45*8;
+	var totalSmallman = 1855;
 
 	var smallmanRatio = transformSmallmanRatio( officers, totalSmallman);
 	var smallmanId = 1;
 	for (var i = 0 ;i < smallmanRatio.length; i++){
 		for (var j = 0;j < smallmanRatio[i];j++){
-			createSmallmanImg(i, smallmanId).attr("title", officers[i]+"名"+mapToPosition(i)).appendTo("#smallman-graph")
+			//var $smallManImage = $("#smallman-"+smallmanId);
+			//if you want to dynamically create, use this
+			var $smallManImage = createSmallmanImg(i, smallmanId).attr("title", officers[i]+"名"+mapToPosition(i));
+			$smallManImage.appendTo("#smallman-graph")
 			.tooltip({
     'selector': '',
     'placement': 'top',
@@ -89,3 +92,4 @@ $(document).ready(function(){
 
 
 });
+
