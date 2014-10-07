@@ -699,10 +699,10 @@ opacity: 1;
       <p>雖然一日內進行九種地方公職人員選舉，卻不是每個地區的選民，都會投九張票，而是會有五張選票，跟三張選票的分別。除了拿到選票張數有差外，要投哪些公職人員，則會因縣市、是否住在直轄市山地原住民區，而有所差別。</p>
     </div>
 
-    <div id="tooltip0" class="tooltip">
+    <div id="tooltip0" class="map-tooltip">
       <p> </p>
     </div>
-    <div id = "tooltip1" class="tooltip">
+    <div id = "tooltip1" class="map-tooltip">
       <p><span id="name"></span></p>
       <p>應選人數</p>
       <p>縣(市)長：<span id="t1v1"></span></p>
@@ -712,7 +712,7 @@ opacity: 1;
       <p>村(里)長：<span id="t1v5"></span></p>
       <p>合計：<span id="t1v6"></span></p>
     </div>
-    <div id = "tooltip2" class="tooltip">
+    <div id = "tooltip2" class="map-tooltip">
       <p><span id= "name2"></span></p>
       <p>應選人數</p>
       <p>鄉(鎮、市)長/原住民區長：<span id="t2v1"></span></p>
@@ -774,10 +774,8 @@ opacity: 1;
         .style("top",color_top+"px");
       d3.select("#sample1")
         .style("background-color",color_five);
-      d3.select("#sample2")
-                                .style("background-color",color_three);
-      d3.select("#sample3")
-                                .style("background-color",color_native);
+      d3.select("#sample2").style("background-color",color_three);
+      d3.select("#sample3").style("background-color",color_native);
       //Define default path generator
 
       //Create SVG element
@@ -863,8 +861,7 @@ opacity: 1;
                     .style("fill","orange");
                   if(d.properties.name){
                     d3.select("#tooltip1")
-                                                                      .select("#name")
-                                                                      .text(d.properties.name);
+                    .select("#name").text(d.properties.name);
                     for(var i =1;i<7;i++){
                       d3.select("#tooltip1")
                         .select("#t1v"+i.toString())
@@ -884,8 +881,7 @@ opacity: 1;
                           .style("display","inline-block")
                       }
                     }
-                                                              d3.select("#tooltip1")
-                                                                      .style("display","inline");
+                    d3.select("#tooltip1").style("display","inline");
                   }
                   else if(d.properties.town){
                     d3.select("#tooltip2")
@@ -912,14 +908,14 @@ opacity: 1;
                   d3.select(this)
                     .style("fill",function(){
                         if(d.properties.number_of_vote == 3){
-                                                                                                        return color_three;
+                          return color_three;
                                                                                                 }
                         else if(d.properties.town){
                           return color_native;
                         }
-                                                                                                else{
-                                                                                                        return color_five;
-                                                                                                }
+                        else{
+                          return color_five;
+                          }
                     });
                   if(d.properties.town){
                     d3.select("#tooltip2")
@@ -934,27 +930,9 @@ opacity: 1;
           })
       })
     </script>
-
-
-
         </div>
     
-        <!-- Li-Yuan Custom -->
-        
-			 
-			
-
-
-
-			 
-			
-
-			<!-- Photo Post -->
-
-			
-
-			
-			
+			<!-- Photo Post -->			
 			
 			
 			
@@ -971,55 +949,7 @@ opacity: 1;
                     <a href="http://datajournalism.ntu.edu.tw/tagged/%E8%97%8D%E5%A9%89%E8%8A%B8">#藍婉芸</a>
                 
                     <a href="http://datajournalism.ntu.edu.tw/tagged/%E7%A4%BE%E6%9C%83">#社會</a>
-                
-            
 
-			
-
-
-
-
-			
-
-
-
-			 
-			
-
-
-
-
-			
-
-
-
-
-			
-
-
-
-
-			
-
-
-
-
-			
-
-
-
-
-			
-
-
-
-
-			
-
-
-
-
-			
 
 			<ul class="icons">
 			   
