@@ -793,11 +793,11 @@ opacity: 1;
       //23.978567
       var prj = d3.geo.mercator().center([120.979531, 24.378567]).scale(6000);
       var path = d3.geo.path().projection(prj);
-      d3.csv("./index_files/liyuan/縣市應選人數.csv",function(data_people){
+      d3.csv("./index_files/liyuan/newgeo.json",function(json){
         console.log(1);
           d3.csv("./index_files/liyuan/選票數.csv",function(data_vote){
             console.log(2);
-            d3.json("./index_files/liyuan/newgeo.json",function(json){
+            d3.json("./index_files/liyuan/縣市應選人數.csv",function(data_people){
               console.log(3);
               for(var i = 0;i < data_vote.length; i++){
                 var name = data_vote[i].縣市名;
