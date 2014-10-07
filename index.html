@@ -822,13 +822,13 @@ opacity: 1;
                 var v4 = data_people[i].鄉民代表;
                 var v5 = data_people[i].村里長;
                 var v6 = data_people[i].合計;
-                var value = [];
-                value.push(v1);
+                var value = [v1, v2, v3, v4, v5, v6];
+                /*value.push(v1);
                 value.push(v2);
                 value.push(v3);
                 value.push(v4);
                 value.push(v5);
-                value.push(v6);
+                value.push(v6);*/
                 for(var j=0;j<json.features.length;j++){
                   if(json.features[j].properties.name == name){
                     json.features[j].properties.value = value;
