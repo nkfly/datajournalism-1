@@ -686,6 +686,17 @@ opacity: 1;
           <div id="vote-number-map" style="position:relative;margin-top:20px;">
 
                 <svg id="svg" style="float:left"></svg>
+                  <div style="position:absolute;left:0px;bottom:0px;"id="image_explanation">
+                    <p><strong>各地區每人分配到到的選票數量及原住民區位置示意圖</p>
+                    <div id="image_color">
+                      <div id ="sample1" class = "color_sample"></div>
+                      五張選票<br>
+                      <div id ="sample2" class = "color_sample"></div>
+                      三張選票<br>
+                      <div id ="sample3" class = "color_sample"></div>
+                      山地原住民區  
+                    </div>
+                  </div>
                   <div style="position:absolute;right:0px;bottom:0px;" id ="map_right" class="text_area">
                     <p><strong>戶籍地決定領取選票張數</p>
                     <p>雖然一日內進行九種地方公職人員選舉，卻不是每個地區的選民，都會投九張票，而是會有五張選票，跟三張選票的分別。除了拿到選票張數有差外，要投哪些公職人員，則會因縣市、是否住在直轄市山地原住民區，而有所差別。</p>
@@ -717,18 +728,6 @@ opacity: 1;
                               <p>依103年5月28日修正公布之公職人員選舉罷免法第2條規定，地方公職人員選舉包括直轄市長、直轄市議員、縣(市)長、縣(市)議員、
       鄉(鎮、市)長、鄉(鎮、市)民代表、直轄市山地原住民區長、直轄市山地原住民區民代表及村(里)長選舉等9種。</p>
                       </div>
-          <div id="image_explanation">
-            <p><strong>各地區每人分配到到的選票數量及原住民區位置示意圖</p>
-            <div id="image_color">
-              <div id ="sample1" class = "color_sample"></div>
-              五張選票<br>
-              <div id ="sample2" class = "color_sample"></div>
-              三張選票<br>
-              <div id ="sample3" class = "color_sample"></div>
-              山地原住民區  
-            </div>
-          </div>
-
           </div>
           
     <script type="text/javascript">
@@ -736,7 +735,8 @@ opacity: 1;
       var w = 750;
       var h = 550;
       var tooltip_top = h-180;
-      var map_right_top = h-180-200;
+      //var map_right_top = h-180-200;
+      var map_right_top = 0;
       var color_top = h-180;
       var color_five = "#A38B77";
                         var color_three = "#D6A82A";
