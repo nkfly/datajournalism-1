@@ -584,8 +584,8 @@ function getLocation() {
 function showPosition(position) {
   console.log(position.coords.latitude);
   console.log(position.coords.longitude);
-    map.panTo(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
-    map.setZoom(15);
+    googlemap.panTo(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+    googlemap.setZoom(15);
 }
 
 function codeAddress() {
