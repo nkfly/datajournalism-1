@@ -566,11 +566,10 @@ function initialize() {
   layer.setMap(googlemap);
 }
 
-$(document).ready(function(){
+
   google.maps.event.addDomListener(window, 'load', initialize);
   getLocation();
 
-});
 
 
 function getLocation() {
@@ -584,6 +583,7 @@ function getLocation() {
 function showPosition(position) {
   console.log(position.coords.latitude);
   console.log(position.coords.longitude);
+  console.log(googlemap);
     googlemap.panTo(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
     googlemap.setZoom(15);
 }
