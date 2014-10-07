@@ -669,13 +669,6 @@ opacity: 1;
 <section class="the-posts single-post">
 
 	<div class="posts-holder">
-
-
-		
-   
-
-		
-
 		<article id="89535832028" class="type_photo " rel="https://www.tumblr.com/reblog/89535832028/pwEFLDUg">
 			<div class="article-content">
         <!-- Li-Yuan Custom -->
@@ -690,32 +683,33 @@ opacity: 1;
             </div>
           </div>
 
-          <div id="map">
-            <div id ="map_right" class="text_area">
-      <p><strong>戶籍地決定領取選票張數</p>
-      <p>雖然一日內進行九種地方公職人員選舉，卻不是每個地區的選民，都會投九張票，而是會有五張選票，跟三張選票的分別。除了拿到選票張數有差外，要投哪些公職人員，則會因縣市、是否住在直轄市山地原住民區，而有所差別。</p>
-    </div>
 
-    <div id="tooltip0" class="map-tooltip">
-      <p> </p>
-    </div>
-    <div id = "tooltip1" class="map-tooltip">
-      <p><span id="name"></span></p>
-      <p>應選人數</p>
-      <p>縣(市)長：<span id="t1v1"></span></p>
-      <p>縣(市)議員：<span id="t1v2"></span></p>
-      <p id="p1">鄉(鎮、市)長/原住民區長：<span id="t1v3"></span></p>
-      <p id="p2">鄉(鎮、市)民代表/原住民區民代表：<span id="t1v4"></span></p>
-      <p>村(里)長：<span id="t1v5"></span></p>
-      <p>合計：<span id="t1v6"></span></p>
-    </div>
-    <div id = "tooltip2" class="map-tooltip">
-      <p><span id= "name2"></span></p>
-      <p>應選人數</p>
-      <p>鄉(鎮、市)長/原住民區長：<span id="t2v1"></span></p>
-      <p>鄉(鎮、市)民代表/原住民區民代表：<span id="t2v2"></span></p>
-    </div>
-    <div id = "under_map" class="text_area">
+
+          <div id="map">
+            <div id ="map_right" class="text_area" style="float:right">
+              <p><strong>戶籍地決定領取選票張數</p>
+              <p>雖然一日內進行九種地方公職人員選舉，卻不是每個地區的選民，都會投九張票，而是會有五張選票，跟三張選票的分別。除了拿到選票張數有差外，要投哪些公職人員，則會因縣市、是否住在直轄市山地原住民區，而有所差別。</p>
+            </div>
+          <div id="tooltip0" class="map-tooltip">
+          <p> </p>
+          </div>
+          <div id = "tooltip1" class="map-tooltip">
+            <p><span id="name"></span></p>
+            <p>應選人數</p>
+            <p>縣(市)長：<span id="t1v1"></span></p>
+            <p>縣(市)議員：<span id="t1v2"></span></p>
+            <p id="p1">鄉(鎮、市)長/原住民區長：<span id="t1v3"></span></p>
+            <p id="p2">鄉(鎮、市)民代表/原住民區民代表：<span id="t1v4"></span></p>
+            <p>村(里)長：<span id="t1v5"></span></p>
+            <p>合計：<span id="t1v6"></span></p>
+          </div>
+          <div id = "tooltip2" class="map-tooltip">
+            <p><span id= "name2"></span></p>
+            <p>應選人數</p>
+            <p>鄉(鎮、市)長/原住民區長：<span id="t2v1"></span></p>
+            <p>鄉(鎮、市)民代表/原住民區民代表：<span id="t2v2"></span></p>
+          </div>
+    <div style="clear:both;"id = "under_map" class="text_area">
                         <p><strong>從七合一選舉到九合一選舉 原住民爭取自治</p>
                         <p>山地原住民區在2010年五都改制後，五個原住民鄉鎮包括烏來、和平、那瑪夏、茂林及桃源合併變成直轄市的區，由於直轄市區長為官派，依法不再實施自治。當時新上路的《地方制度法》遂因此受到原住民族與公民團體質疑，認為此舉將違反聯合國及馬英九2008年競選政見對原住民自治權的承
 諾。最後在當地原住民爭取下，立院於今（2014）年1月三讀通過，直轄市下轄區由山地鄉改制者，改稱「山地原住民區」，恢復區長、區代表選舉，並享相關地方自治權限。</p>
@@ -791,11 +785,8 @@ opacity: 1;
       var prj = d3.geo.mercator().center([120.979531, 24.378567]).scale(6000);
       var path = d3.geo.path().projection(prj);
       d3.json("./index_files/liyuan/newgeo.json",function(json){
-        console.log(1);
           d3.csv("./index_files/liyuan/選票數.csv",function(data_vote){
-            console.log(2);
             d3.csv("./index_files/liyuan/縣市應選人數.csv",function(data_people){
-              console.log(3);
               for(var i = 0;i < data_vote.length; i++){
                 var name = data_vote[i].縣市名;
                 var number_of_vote = data_vote[i].選票數;
