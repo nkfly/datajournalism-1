@@ -71,13 +71,8 @@
 
 
   <script src="./index_files/jquery.min.js"></script>
-<!-- Li-Yuan -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-  <script src="./index_files/liyuan/smallman.js"></script>
-  <script src="./index_files/liyuan/map.d3.js"></script>
-  <link rel="stylesheet" href="./index_files/liyuan/tw_map.css">
+  <script src="./index_files/embed.js"></script>
 
-<!-- Li-Yuan -->
 
 
 
@@ -541,6 +536,9 @@ opacity: 1;
 
 
 <!-- Li-Yuan Custom -->
+<script src="./index_files/liyuan/smallman.js"></script>
+<script src="./index_files/liyuan/map.d3.js"></script>
+<link rel="stylesheet" href="./index_files/liyuan/tw_map.css">
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 <link rel="stylesheet" type="text/css" href="./index_files/liyuan/smallman.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -582,9 +580,9 @@ function getLocation() {
 }
 
 function showPosition(position) {
-  console.log(position.coords.latitude);
-  console.log(position.coords.longitude);
-  console.log(googlemap);
+  // console.log(position.coords.latitude);
+  // console.log(position.coords.longitude);
+  // console.log(googlemap);
     googlemap.panTo(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
     googlemap.setZoom(15);
 }
@@ -931,7 +929,7 @@ function codeAddress() {
       })
     </script>
         </div>
-        <img style="width:inherit;"src="./index_files/liyuan/vote-process.png" alt="選舉流程"/>
+        <img style="margin-left:auto;margin-right:auto"src="./index_files/liyuan/vote-process.png" alt="選舉流程"/>
 
         <div class="caption">
           <div id="map-canvas" style="height: 500px;margin: 0px;padding: 0px"></div>
