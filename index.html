@@ -692,10 +692,13 @@ opacity: 1;
             </p>
             </div>
           </div>
-          <div id ="map_right" class="text_area">
+
+          <div id="map">
+            <div id ="map_right" class="text_area">
       <p><strong>戶籍地決定領取選票張數</p>
       <p>雖然一日內進行九種地方公職人員選舉，卻不是每個地區的選民，都會投九張票，而是會有五張選票，跟三張選票的分別。除了拿到選票張數有差外，要投哪些公職人員，則會因縣市、是否住在直轄市山地原住民區，而有所差別。</p>
     </div>
+
     <div id="tooltip0" class="tooltip">
       <p> </p>
     </div>
@@ -734,6 +737,8 @@ opacity: 1;
         山地原住民區  
       </div>
     </div>
+          </div>
+          
     <script type="text/javascript">
       //Width and height
       var w = 750;
@@ -775,8 +780,8 @@ opacity: 1;
       //Define default path generator
 
       //Create SVG element
-      var svg = d3.select("body")
-            .append("svg")
+      var svg = d3.select("#map")
+            .prepend("svg")
             .attr("width", w)
             .attr("height", h)
             .call(d3.behavior.zoom()

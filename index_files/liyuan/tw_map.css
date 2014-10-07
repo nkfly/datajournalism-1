@@ -1,5 +1,4 @@
 .tooltip{
-        position:absolute;
         width:300px;
         height:170px;
         padding:10px;
@@ -12,7 +11,7 @@
 	display:None;
 }
 #map_right{
-	position:absolute;
+	
 	width:370px;
 	height:200px;
 }
@@ -34,19 +33,19 @@
         line-height:20px;
 }
 #under_map{
-	position:absolute;
+	
 	padding:20px;
 }
 #image_explanation{
 	font-size:16px;
-	position:absolute;
+	
 	height:100px;
 	width:180px;
 }
 #image_color{
 	padding:2px;
 	font-size:15px;
-	position:absolute;
+	
 	height:80px;
 	width:180px;
 	border-style:dashed;
