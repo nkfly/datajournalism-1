@@ -536,6 +536,7 @@ opacity: 1;
 
 
 <!-- Li-Yuan Custom -->
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 <link rel="stylesheet" href="./index_files/liyuan/tw_map.css">
 <link rel="stylesheet" type="text/css" href="./index_files/liyuan/smallman.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
@@ -562,6 +563,7 @@ function initialize() {
   });
   layer.setMap(googlemap);
   getLocation();
+  setTimeout(function(){google.maps.event.trigger(googlemap, 'resize')}, 1500);
 }
 
 
