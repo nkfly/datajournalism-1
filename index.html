@@ -544,6 +544,61 @@ opacity: 1;
 <link rel="stylesheet" type="text/css" href="./index_files/liyuan/smallman.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+<script type="text/javascript">
+var map, layer, geocoder;
+
+function initialize() {
+  var chicago = new google.maps.LatLng(23.973875, 120.982024);
+  geocoder = new google.maps.Geocoder();
+
+  map = new google.maps.Map(document.getElementById('map-canvas'), {
+    center: chicago,
+    zoom: 15
+  });
+
+  layer = new google.maps.FusionTablesLayer({
+    query: {
+      select: '\'Geocodable address\'',
+      from: '1YKMYkHsbLta_rXfGtRrx2N578QYL3hFv1CF8waaF'
+    }
+  });
+  layer.setMap(map);
+}
+
+
+google.maps.event.addDomListener(window, 'load', initialize);
+getLocation();
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        console.log("Geolocation is not supported by this browser.");
+    }
+}
+
+function showPosition(position) {
+  console.log(position.coords.latitude);
+  console.log(position.coords.longitude);
+    map.panTo(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+    map.setZoom(15);
+}
+
+function codeAddress() {
+  var address = document.getElementById('address').value;
+  geocoder.geocode( { 'address': address}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      map.panTo(results[0].geometry.location);
+    map.setZoom(15);
+    } else {
+      console.log('Geocode was not successful for the following reason: ' + status);
+    }
+  });
+  return false;
+}
+
+</script>
 <!-- Li-Yuan Custom -->
 
 </head>
@@ -614,56 +669,11 @@ opacity: 1;
 		<li><a href="http://datajournalismntu.tumblr.com/opendata">Open Data</a></li>
 	</ul>
 
-	<ul class="social-menu">
-    
-
-
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+	<ul class="social-menu">		
 		
 	</ul>
 
 </nav>
-
-
-
-
-
-
-
-
-
-
 
 
 <section class="the-posts single-post">
@@ -917,7 +927,16 @@ opacity: 1;
       })
     </script>
         </div>
-        <img src="./index_files/liyuan/vote-process.png" alt="選舉流程"/>
+        <img style="width:inherit;"src="./index_files/liyuan/vote-process.png" alt="選舉流程"/>
+
+        <div class="caption">
+          <div id="map-canvas" style="height: 500px;margin: 0px;padding: 0px"></div>
+          <form onSubmit="return codeAddress();" action="" role="form" class="form-inline">
+            <input type="text" id="address" placeholder="請輸入你的戶籍地址" class="form-control"></input>
+            <button type="submit" class="btn btn-success">送出</button>
+          <span style="color:red">註:因為中選會資料格式有誤，目前苗栗、澎湖、雲林、南投、台東地區並無資料。</span>
+          </form>
+        </div>
     
 			<!-- Photo Post -->			
 			
