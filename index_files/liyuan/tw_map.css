@@ -19,19 +19,12 @@
 	width:370px;
 	height:200px;
 }
-.text_area p{
-	font-family:sans-serif;
-	line-height:20px;
-}
+
 
 .hidden{
         display:None;
 }
-.tooltip p{
-        margin:0;
-        font-family:sans-serif;
-        line-height:20px;
-}
+
 #under_map{
 	
 	padding:20px;
