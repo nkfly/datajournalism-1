@@ -685,6 +685,7 @@ opacity: 1;
 
 
 
+          <svg id="svg" style="float:left"></svg>
           <div id="map">
             <div id ="map_right" class="text_area" style="float:right">
               <p><strong>戶籍地決定領取選票張數</p>
@@ -770,8 +771,7 @@ opacity: 1;
       //Define default path generator
 
       //Create SVG element
-      var svg = d3.select("#map")
-            .append("svg")
+      var svg = d3.select("#svg")
             .attr("width", w)
             .attr("height", h)
             .call(d3.behavior.zoom()
