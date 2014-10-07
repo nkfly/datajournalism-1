@@ -39,13 +39,12 @@
 #image_explanation{	
 	
 	height:100px;
-	width:180px;
+	width:200px;
 }
 #image_color{
 	padding:2px;	
-	
 	height:90px;
-	width:180px;
+	width:200px;
 	border-style:dashed;
 }
 .color_sample{
