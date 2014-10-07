@@ -21,34 +21,28 @@
 }
 .text_area p{
 	font-family:sans-serif;
-	font-size:14px;
 	line-height:20px;
 }
-.text_area p strong{
-	font-size:25px;
-}
+
 .hidden{
         display:None;
 }
 .tooltip p{
         margin:0;
         font-family:sans-serif;
-        font-size:16px;
         line-height:20px;
 }
 #under_map{
 	
 	padding:20px;
 }
-#image_explanation{
-	font-size:16px;
+#image_explanation{	
 	
 	height:100px;
 	width:180px;
 }
 #image_color{
-	padding:2px;
-	font-size:15px;
+	padding:2px;	
 	
 	height:90px;
 	width:180px;
