@@ -737,6 +737,7 @@ opacity: 1;
         山地原住民區  
       </div>
     </div>
+
           </div>
           
     <script type="text/javascript">
@@ -781,7 +782,7 @@ opacity: 1;
 
       //Create SVG element
       var svg = d3.select("#map")
-            .prepend("svg")
+            .append("svg")
             .attr("width", w)
             .attr("height", h)
             .call(d3.behavior.zoom()
