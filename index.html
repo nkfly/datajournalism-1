@@ -637,7 +637,7 @@ function codeAddress() {
           <div id="vote-number-map" style="position:relative;margin-top:20px;">
 
                 <svg id="svg" style="float:left"></svg>
-                  <div style="position:absolute;left:0px;top:0px;width:220px;">
+                  <div style="position:absolute;left:0px;top:0px;width:260px;">
                     <p>請點選台灣各區域以顯示資料</p>
                   </div>
                   <div style="position:absolute;left:0px;bottom:0px;"id="image_explanation">
@@ -871,9 +871,11 @@ function codeAddress() {
       })
     </script>
         </div>
-        <img style="margin-left:auto;margin-right:auto"src="./index_files/liyuan/vote-process.png" alt="選舉流程"/>
+        <img style="width:1080px;height:766px;margin-left:auto;margin-right:auto"src="./index_files/liyuan/vote-process.png" alt="選舉流程"/>
+
 
         <div class="caption">
+          <h2>台灣各地投票所位置查詢</h2>
           <div id="map-canvas" style="height: 500px;margin: 0px;padding: 0px"></div>
           <form onSubmit="return codeAddress();" action="" role="form" class="form-inline">
             <input type="text" id="address" placeholder="請輸入你的戶籍地址" class="form-control"></input>
