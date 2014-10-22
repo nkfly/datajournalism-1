@@ -486,30 +486,54 @@ opacity: 1;
 <script type="text/javascript">
 var googlemap, layer, geocoder;
 function initialize() {
-  var chicago = new google.maps.LatLng(23.973875, 120.982024);
+  var taiwan = new google.maps.LatLng(23.973875, 120.982024);
   geocoder = new google.maps.Geocoder();
 
   googlemap = new google.maps.Map(document.getElementById('map-canvas'), {
-    center: chicago,
-    zoom: 15
+    center: taiwan,
+    zoom: 7
   });
 
   layer = new google.maps.FusionTablesLayer({
     query: {
       select: '\'Geocodable address\'',
       from: '1YKMYkHsbLta_rXfGtRrx2N578QYL3hFv1CF8waaF'
+    },
+    heatmap: {
+      enabled: true
     }
   });
   layer.setMap(googlemap);
-  getLocation();
+  google.maps.event.addListener(googlemap, 'zoom_changed', function() {
+    var zoomLevel = googlemap.getZoom();
+    if( zoomLevel > 10 ) {
+      layer.setOptions({
+          styles: [{
+            markerOptions: {
+              iconName: 'small_red'
+            }
+          }],
+          heatmap: {
+            enabled: false
+          }
+        });
+      
+    } else {
+      layer.setOptions({
+          heatmap: {
+            enabled: true
+          }
+        });
+      } 
+    });
+
+
   setTimeout(function(){google.maps.event.trigger(googlemap, 'resize')}, 1500);
 }
 
 
   google.maps.event.addDomListener(window, 'load', initialize);
-  
-
-
+  getLocation();
 
 function getLocation() {
     if (navigator.geolocation) {
