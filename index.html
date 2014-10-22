@@ -527,13 +527,12 @@ function initialize() {
     });
 
 
-  getLocation();
   setTimeout(function(){google.maps.event.trigger(googlemap, 'resize')}, 1500);
 }
 
 
   google.maps.event.addDomListener(window, 'load', initialize);
-  
+  getLocation();
 
 function getLocation() {
     if (navigator.geolocation) {
