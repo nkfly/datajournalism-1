@@ -4,7 +4,7 @@
         padding:10px;
         position:absolute;
         right:0px;
-        font-size:14px;
+        font-size:16px;
         line-height: 10px;
         background-color:#F4D597;
         -webkit-border-radius:10px;
@@ -32,13 +32,13 @@
 #image_explanation{	
 	
 	height:100px;
-	width:220px;
+	width:260px;
 }
 #image_color{
 	padding:2px;
 	padding-left: 22px;
 	height:90px;
-	width:220px;
+	width:240px;
 	border-style:dashed;
 }
 .color_sample{
