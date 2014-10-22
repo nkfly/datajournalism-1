@@ -478,6 +478,7 @@ opacity: 1;
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   <script src="./index_files/liyuan/smallman.js"></script>
   <script src="./index_files/liyuan/map.d3.js"></script>
+  <script src="./index_files/liyuan/map_revise.js"></script>
   <style>
     #map-canvas img{max-width: inherit;}
   </style>
@@ -637,9 +638,7 @@ function codeAddress() {
           <div id="vote-number-map" style="position:relative;margin-top:20px;">
 
                 <svg id="svg" style="float:left"></svg>
-                  <div style="position:absolute;left:20px;top:0px;">
-                    <h2>請點選台灣各區域以顯示資料</h2>
-                  </div>
+                  
                   <div style="position:absolute;left:20px;bottom:0px;"id="image_explanation">
                     <p><strong>各地區每人分配到到的選票數量及原住民區位置示意圖</p>
                     <div id="image_color">
@@ -650,10 +649,6 @@ function codeAddress() {
                       <div id ="sample3" class = "color_sample"></div>
                       山地原住民區  
                     </div>
-                  </div>
-                  <div style="position:absolute;right:0px;bottom:0px;" id ="map_right" class="text_area">
-                    <h2>戶籍地決定領取選票張數</h2>
-                    <p>雖然一日內進行九種地方公職人員選舉，卻不是每個地區的選民，都會投九張票，而是會有五張選票，跟三張選票的分別。除了拿到選票張數有差外，要投哪些公職人員，則會因縣市、是否住在直轄市山地原住民區，而有所差別。</p>
                   </div>
                 <div id="tooltip0" class="map-tooltip">
                 <p> </p>
@@ -685,14 +680,15 @@ function codeAddress() {
       //Width and height
       var w = 700;
       var h = 550;
+      var islands = ['澎湖縣','金門縣','連江縣','綠島鄉','蘭嶼鄉','琉球鄉'];
       var tooltip_top = h-180;
       var map_right_top = h-180-200;
       var color_top = h-180;
-      var color_five = "#A38B77";
-                        var color_three = "#D6A82A";
-                        var color_native = "#F1E8BF";
+      var color_five = "#F0C4AC";
+      var color_three = "#F2A29D";
+      var color_native = "#72BAAC";
       d3.select("#tooltip0")
-        .style("display","inline-block")
+	.style("display","inline-block")
         .style("z-index","1")
         .style("top",tooltip_top + "px")
         .style("left",w+"px");
@@ -781,11 +777,13 @@ function codeAddress() {
                 .enter()
                 .append("path")
                 .attr("d",path)
+		.attr("transform",transform_function)
                 .style("fill",function(d){
+			//alert("hey");
                         if(d.properties.number_of_vote == 3){
                           return color_three;
                         }
-                        else if(d.properties.town){
+                        else if(d.properties.town && islands.indexOf(d.properties.town) == -1){
                           return color_native;
                         }
                         else{
@@ -850,7 +848,7 @@ function codeAddress() {
                         if(d.properties.number_of_vote == 3){
                           return color_three;
                                                                                                 }
-                        else if(d.properties.town){
+                        else if(d.properties.town && islands.indexOf(d.properties.town) == -1){
                           return color_native;
                         }
                         else{
@@ -865,6 +863,28 @@ function codeAddress() {
                     d3.select("#tooltip1")
                       .style("display","None");
                   }
+                });
+		
+		svg.selectAll("path")
+			.each(function(d){
+                        //alert("hihi");
+                        var islands = ['澎湖縣','金門縣','連江縣','綠島鄉','蘭嶼鄉','琉球鄉'];
+                        var name;
+                        if(d.properties.name){
+                                name = d.properties.name;
+                        }
+                        else if(d.properties.town){
+                                name = d.properties.town;
+                        }
+                        else{
+                                return 0;
+                        }
+                        //alert("wtf");
+                        if(islands.indexOf(name) != -1){
+                                create_boundary(d,d3.select(this).position(),name,this,json);
+                        }
+                        return 0;
+                        //alert(d3.select(this).position().top);
                 });
             })
           })
