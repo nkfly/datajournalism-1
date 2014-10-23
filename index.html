@@ -477,6 +477,7 @@ opacity: 1;
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   <script src="./index_files/liyuan/smallman.js"></script>
   <script src="./index_files/liyuan/map.d3.js"></script>
+  <script src="./index_files/liyuan/map_revise.js"></script>
   <style>
     #map-canvas img{max-width: inherit;}
   </style>
@@ -484,30 +485,54 @@ opacity: 1;
 <script type="text/javascript">
 var googlemap, layer, geocoder;
 function initialize() {
-  var chicago = new google.maps.LatLng(23.973875, 120.982024);
+  var taiwan = new google.maps.LatLng(23.973875, 120.982024);
   geocoder = new google.maps.Geocoder();
 
   googlemap = new google.maps.Map(document.getElementById('map-canvas'), {
-    center: chicago,
-    zoom: 15
+    center: taiwan,
+    zoom: 7
   });
 
   layer = new google.maps.FusionTablesLayer({
     query: {
       select: '\'Geocodable address\'',
       from: '1YKMYkHsbLta_rXfGtRrx2N578QYL3hFv1CF8waaF'
+    },
+    heatmap: {
+      enabled: true
     }
   });
   layer.setMap(googlemap);
-  getLocation();
+  google.maps.event.addListener(googlemap, 'zoom_changed', function() {
+    var zoomLevel = googlemap.getZoom();
+    if( zoomLevel > 10 ) {
+      layer.setOptions({
+          styles: [{
+            markerOptions: {
+              iconName: 'small_red'
+            }
+          }],
+          heatmap: {
+            enabled: false
+          }
+        });
+      
+    } else {
+      layer.setOptions({
+          heatmap: {
+            enabled: true
+          }
+        });
+      } 
+    });
+
+
   setTimeout(function(){google.maps.event.trigger(googlemap, 'resize')}, 1500);
 }
 
 
   google.maps.event.addDomListener(window, 'load', initialize);
-  
-
-
+  getLocation();
 
 function getLocation() {
     if (navigator.geolocation) {
@@ -625,40 +650,28 @@ function codeAddress() {
         <div class="caption">
           <blockquote><h5>記者陳貞樺、蔣宜婷、吳旻誠、潘冠綸、洪立遠／報導</h5></blockquote>
           <div id="smallman-graph" style="position:relative;">
-            <div id="smallman-description" style="font-weight:bold;position:absolute;left:15px;bottom:15px;opacity:0.8;background-color:white;width:660px;height:200px;padding-left:10px;padding-right:10px;">
-              <h2>年底九合一選舉　選舉規模人數為史上最高</h2>
-              <p>
-            根據中選會的統計，今年年底的九合一選舉預計選出高達11130名公職人員，為台灣自治史上最高。其中六都預計選出4688人，其他縣市則是6442人。在這一萬多名公職人員中，里長職位最多，為7851人;其次為各行政層級民代表，有2146人。值得一提的是，這次選舉將增加「直轄市山地原住民區民代表」和「區長」投票，預計選出原住民區長6名、以及山地原住民區民代表50名。
-            </p>
-            </div>
+            <h2>年底九合一選舉　選舉規模人數為史上最高</h2>
           </div>
 
           <div id="vote-number-map" style="position:relative;margin-top:20px;">
 
                 <svg id="svg" style="float:left"></svg>
-                  <div style="position:absolute;left:20px;top:0px;">
-                    <h2>請點選台灣各區域以顯示資料</h2>
-                  </div>
+                  
                   <div style="position:absolute;left:20px;bottom:0px;"id="image_explanation">
-                    <p><strong>各地區每人分配到到的選票數量及原住民區位置示意圖</p>
                     <div id="image_color">
                       <div id ="sample1" class = "color_sample"></div>
                       五張選票<br>
                       <div id ="sample2" class = "color_sample"></div>
                       三張選票<br>
                       <div id ="sample3" class = "color_sample"></div>
-                      山地原住民區  
+                      山地原住民五張選票  
                     </div>
-                  </div>
-                  <div style="position:absolute;right:0px;bottom:0px;" id ="map_right" class="text_area">
-                    <h2>戶籍地決定領取選票張數</h2>
-                    <p>雖然一日內進行九種地方公職人員選舉，卻不是每個地區的選民，都會投九張票，而是會有五張選票，跟三張選票的分別。除了拿到選票張數有差外，要投哪些公職人員，則會因縣市、是否住在直轄市山地原住民區，而有所差別。</p>
                   </div>
                 <div id="tooltip0" class="map-tooltip">
                 <p> </p>
                 </div>
                 <div id = "tooltip1" class="map-tooltip">
-                  <p><span id="name"></span></p>
+                  <p><span style="font-size:22px"id="name"></span></p>
                   <p>應選人數</p>
                   <p>縣(市)長：<span id="t1v1"></span></p>
                   <p>縣(市)議員：<span id="t1v2"></span></p>
@@ -668,7 +681,7 @@ function codeAddress() {
                   <p>合計：<span id="t1v6"></span></p>
                 </div>
                 <div id = "tooltip2" class="map-tooltip">
-                  <p><span id= "name2"></span></p>
+                  <p><span style="font-size:22px"id= "name2"></span></p>
                   <p>應選人數</p>
                   <p>鄉(鎮、市)長/原住民區長：<span id="t2v1"></span></p>
                   <p>鄉(鎮、市)民代表/原住民區民代表：<span id="t2v2"></span></p>
@@ -684,14 +697,15 @@ function codeAddress() {
       //Width and height
       var w = 700;
       var h = 550;
+      var islands = ['澎湖縣','金門縣','連江縣','綠島鄉','蘭嶼鄉','琉球鄉'];
       var tooltip_top = h-180;
       var map_right_top = h-180-200;
       var color_top = h-180;
-      var color_five = "#A38B77";
-                        var color_three = "#D6A82A";
-                        var color_native = "#F1E8BF";
+      var color_five = "#F0C4AC";
+      var color_three = "#F2A29D";
+      var color_native = "#72BAAC";
       d3.select("#tooltip0")
-        .style("display","inline-block")
+	.style("display","inline-block")
         .style("z-index","1")
         .style("top",tooltip_top + "px")
         .style("left",w+"px");
@@ -780,11 +794,13 @@ function codeAddress() {
                 .enter()
                 .append("path")
                 .attr("d",path)
+		.attr("transform",transform_function)
                 .style("fill",function(d){
+			//alert("hey");
                         if(d.properties.number_of_vote == 3){
                           return color_three;
                         }
-                        else if(d.properties.town){
+                        else if(d.properties.town && islands.indexOf(d.properties.town) == -1){
                           return color_native;
                         }
                         else{
@@ -849,7 +865,7 @@ function codeAddress() {
                         if(d.properties.number_of_vote == 3){
                           return color_three;
                                                                                                 }
-                        else if(d.properties.town){
+                        else if(d.properties.town && islands.indexOf(d.properties.town) == -1){
                           return color_native;
                         }
                         else{
@@ -865,12 +881,33 @@ function codeAddress() {
                       .style("display","None");
                   }
                 });
+		
+		svg.selectAll("path")
+			.each(function(d){
+                        //alert("hihi");
+                        var islands = ['澎湖縣','金門縣','連江縣','綠島鄉','蘭嶼鄉','琉球鄉'];
+                        var name;
+                        if(d.properties.name){
+                                name = d.properties.name;
+                        }
+                        else if(d.properties.town){
+                                name = d.properties.town;
+                        }
+                        else{
+                                return 0;
+                        }
+                        //alert("wtf");
+                        if(islands.indexOf(name) != -1){
+                                create_boundary(d,d3.select(this).position(),name,this,json);
+                        }
+                        return 0;
+                        //alert(d3.select(this).position().top);
+                });
             })
           })
       })
     </script>
         </div>
-        <img src="./index_files/liyuan/vote-process.png" alt="選舉流程"/>
 
 
         <div class="caption">
@@ -879,7 +916,7 @@ function codeAddress() {
           <form onSubmit="return codeAddress();" action="" role="form" class="form-inline">
             <input type="text" id="address" placeholder="請輸入你的戶籍地址" class="form-control"></input>
             <button type="submit" class="btn btn-success">送出</button>
-          <span style="color:red">註:因為中選會資料格式有誤，目前苗栗、澎湖、雲林、南投、台東地區並無資料。</span>
+          <span style="color:red">註:因為中選會資料格式有誤，目前南投地區並無資料。</span>
           </form>
         </div>
     
