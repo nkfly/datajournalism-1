@@ -57,7 +57,7 @@ $(document).ready(function(){
 	var officers = [6, 16, 532, 375, 198, 2096, 6, 50, 7851];
 	// mayor, countryHead, countryDelegate, cityCouncilor, countyHead,
 	// countyDelegate, areaHead, areaDelegate, villageHead
-	var totalSmallman = 11130;
+	var totalSmallman = 1855;
 
 	var smallmanRatio = transformSmallmanRatio( officers, totalSmallman);
 	var smallmanId = 1;
