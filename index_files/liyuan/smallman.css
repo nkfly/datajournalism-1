@@ -13,6 +13,17 @@ img.smallman {
 
 }
 
+.rotate {
+	-moz-transition: all 1000ms ease;
+    -o-transition: all 1000ms ease;
+    -webkit-transition: all 1000ms ease;
+    transition: all 1000ms ease;
+    -moz-transform: rotateY(60deg);
+    -o-transform: rotateY(60deg);
+    -webkit-transform: rotateY(60deg);
+    transform: rotateY(60deg);
+}
+
 .smallman-bigger{
 	display:inline-block;
 	width:26px !important;

@@ -52,9 +52,35 @@ function createSmallmanImg(i, smallmanId){
 			+ mapToPNG(i) + '.png">');
 }
 
+function resetSmallRatioImage(){
+	$("#smallman-ratio-1").css("left","0px").removeClass("rotate");
+	$("#smallman-ratio-2").add("#smallman-ratio-3").css("left","13px").show();
+	$("#smallman-ratio-4").css("left","20px").removeClass("rotate");
+	$("#smallman-ratio-5").css("left","30px").removeClass("rotate");
+	$("#smallman-ratio-6").css("left","40px").removeClass("rotate");
+	$("#smallman-ratio-7").css("left","50px").removeClass("rotate");
+	$("#smallman-ratio-8").css("left","60px").removeClass("rotate");
+	$("#smallman-ratio-9").css("left","70px").removeClass("rotate");
+}
+
+function animateSmallmanRatio(){
+	$("#smallman-ratio-2").add("#smallman-ratio-3").hide();
+	$("#smallman-ratio-4").add("#smallman-ratio-5").add("#smallman-ratio-5").add("#smallman-ratio-6")
+	.add("#smallman-ratio-7").add("#smallman-ratio-8").add("#smallman-ratio-9").addClass("rotate").animate({
+		left: "0px"
+	},1000,function(){
+
+	});
+
+}
+
 
 $(document).ready(function(){
+	resetSmallRatioImage();
+	$("#smallman-ratio").hover(animateSmallmanRatio, resetSmallRatioImage)	
 	var officers = [6, 16, 532, 375, 198, 2096, 6, 50, 7851];
+	setTimeout(animateSmallmanRatio, 3000)
+	setTimeout(resetSmallRatioImage, 7000)
 	// mayor, countryHead, countryDelegate, cityCouncilor, countyHead,
 	// countyDelegate, areaHead, areaDelegate, villageHead
 	var totalSmallman = 1855;
