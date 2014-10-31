@@ -183,9 +183,9 @@
         var tooltip_top = h-180;
         var map_right_top = h-180-200;
         var color_top = h-180;
-        var color_five = "#F0C4AC";
-        var color_three = "#F2A29D";
-        var color_native = "#72BAAC";
+        var color_five = "#FA8722";
+        var color_three = "#E2244A";
+        var color_native = "#BB009A";
         d3.select("#tooltip0")
         .style("display","inline-block")
         .style("z-index","1")
@@ -271,6 +271,7 @@
                     }
                   }
                 }
+		
                 svg.selectAll("path")
                 .data(json.features)
                 .enter()
