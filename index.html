@@ -275,7 +275,7 @@
                 svg.selectAll("path.map")
                 .data(json.features)
                 .enter()
-                .append("path")
+                .append("path.map")
                 .attr("d",path)
                 .attr("transform",transform_function)
                 .style("fill",function(d){
