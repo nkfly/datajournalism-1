@@ -47,7 +47,7 @@
 	height:20px;
 	width:50px;
 }
-path{
+path.map{
 	stroke:white;
 	stroke-width:0.4px;
 }
