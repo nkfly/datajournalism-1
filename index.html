@@ -272,10 +272,10 @@
                   }
                 }
 		
-                svg.selectAll("path .map")
+                svg.selectAll("path.map")
                 .data(json.features)
                 .enter()
-                .append("path .map")
+                .append("path")
                 .attr("d",path)
                 .attr("transform",transform_function)
                 .style("fill",function(d){
@@ -365,7 +365,7 @@
     }
   });
 
-  svg.selectAll("path .map")
+  svg.selectAll("path.map")
   .each(function(d){
                           //alert("hihi");
                           var islands = ['澎湖縣','金門縣','連江縣','綠島鄉','蘭嶼鄉','琉球鄉'];
