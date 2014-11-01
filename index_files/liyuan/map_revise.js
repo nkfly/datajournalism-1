@@ -150,6 +150,26 @@ function create_boundary(d,position,name,obj,json){
 		})
 	return 0;
 }
+function solve(x1,y1,x2,y2){
+	var a = (y1-y2)/(x1-x2);
+	var b =  y1-a*x1;
+	return [a,b]
+}
+function find_line(svg){
+	var x1,x2,y1,y2;
+	svg.selectAll("path")
+		.each(function(d){
+			if(d.properties.name == "新北市"){
+				x1 = d3.select(this).position().left;
+				y1 = (d3.select(this).position().top + d3.select(this).position().bottom)/2;
+			}
+			else if(d.properties.name == "屏東縣"){
+				x2 = d3.select(this).position().left;
+                                y2 = (d3.select(this).position().top + d3.select(this).position().bottom)/2;				
+			}
+		});
+	return solve(x1,y1,x2,y2);
+}
 function mouseover(obj,d,json){
 	var coordinates = [0, 0];
 	coordinates = d3.mouse(obj);
@@ -158,6 +178,9 @@ function mouseover(obj,d,json){
 	var left = d3.select(obj).position().left;
 	var x1 = (d3.select(obj).position().left + d3.select(obj).position().right +350)/2;
 	var y1 = (d3.select(obj).position().top + d3.select(obj).position().bottom)/2;
+	var solve_result = find_line(svg);
+	//alert(solve_result);
+	/*
 	if((297*left + 97*y1 - 116143) >= 0){
 		x2 = x1 + 120;
 		var tooltip_left = x2 +100;
@@ -165,7 +188,15 @@ function mouseover(obj,d,json){
 	else{
 		x2 = x1 - 120;
 		var tooltip_left = x2-300 + 100;
-	}
+	}*/
+	if((solve_result[0]*left + solve_result[1]-y1) <= 0){
+                x2 = x1 + 120;
+                var tooltip_left = x2 +100;
+        }
+        else{
+                x2 = x1 - 120;
+                var tooltip_left = x2-300 + 100;
+        }
 	y2 = y1-5;
 	var tooltip_top = y2-25;
 	move_up = ['蘭嶼鄉','綠島鄉','琉球鄉'];
