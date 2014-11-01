@@ -171,10 +171,15 @@ function find_line(svg){
 	return solve(x1,y1,x2,y2);
 }
 function mouseover(obj,d,json){
+	/*
 	var coordinates = [0, 0];
 	coordinates = d3.mouse(obj);
 	var x = coordinates[0];
 	var y = coordinates[1];
+	*/
+	var centroid = path.centroid(d);
+	var x = centroid[0];
+	var y = centroid[1];
 	var left = d3.select(obj).position().left;
 	var x1 = (d3.select(obj).position().left + d3.select(obj).position().right +350)/2;
 	var y1 = (d3.select(obj).position().top + d3.select(obj).position().bottom)/2;
