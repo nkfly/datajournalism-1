@@ -10,6 +10,7 @@ img.smallman {
        -o-transition: all 1s ease;
       -ms-transition: all 1s ease;
           transition: all 1s ease;
+    opacity:0.5;
 
 }
 
