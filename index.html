@@ -138,7 +138,7 @@
     </div>
     <div id="vote-number-map" style="position:relative;margin-left:auto;margin-right:auto;">
       <h2>各區領取選票互動圖表</h2>
-      <svg id="svg1"></svg>
+      <svg id="svg1" style=position:relative;left:100px;></svg>
       <div style="position:absolute;left:20px;bottom:0px;"id="image_explanation">
         <div id="image_color">
           <div id ="sample1" class = "color_sample"></div>
@@ -148,9 +148,6 @@
           <div id ="sample3" class = "color_sample"></div>
           山地原住民五張選票  
         </div>
-      </div>
-      <div id="tooltip0" class="map-tooltip">
-        <p> </p>
       </div>
       <div id = "tooltip1" class="map-tooltip">
         <p><span style="font-size:22px"id="name"></span></p>
@@ -258,12 +255,6 @@
                   var v5 = data_people[i].村里長;
                   var v6 = data_people[i].合計;
                   var value = [v1, v2, v3, v4, v5, v6];
-                  /*value.push(v1);
-                  value.push(v2);
-                  value.push(v3);
-                  value.push(v4);
-                  value.push(v5);
-                  value.push(v6);*/
                   for(var j=0;j<json.features.length;j++){
                     if(json.features[j].properties.name == name){
                       json.features[j].properties.value = value;
@@ -279,91 +270,96 @@
                 .attr("d",path)
                 .attr("transform",transform_function)
                 .style("fill",function(d){
-  			//alert("hey");
-        if(d.properties.number_of_vote == 3){
-          return color_three;
-        }
-        else if(d.properties.town && islands.indexOf(d.properties.town) == -1){
-          return color_native;
-        }
-        else{
-          return color_five;
-        }
-      })
+        		if(d.properties.number_of_vote == 3){
+          			return color_three;
+        		}
+        		else if(d.properties.town && islands.indexOf(d.properties.town) == -1){
+          			return color_native;
+        		}
+        		else{
+          			return color_five;
+        		}
+      		})
                 .style("z-index","1")
                 .on("mouseover",function(d){
-                  var mouse = d3.mouse(svg.node()).map(function(d){ 
-                    return parseInt(d);
-                  });
-                  d3.select(this)
-                  .style("fill","orange");
-                  if(d.properties.name){
-                    d3.select("#tooltip1")
-                    .select("#name").text(d.properties.name);
-                    for(var i =1;i<7;i++){
-                      d3.select("#tooltip1")
-                      .select("#t1v"+i.toString())
-                      .text(d.properties.value[i-1]);
-                    }
-                    if(d.properties.number_of_vote == 3){
-                      for(var i=1;i<3;i++){
-                        d3.select("#tooltip1")
-                        .select("#p"+i.toString())
-                        .style("display","None");
-                      }
-                    }
-                    else{
-                      for(var i=1;i<3;i++){
-                        d3.select("#tooltip1")
-                        .select("#p"+i.toString())
-                        .style("display","inline-block")
-                      }
-                    }
-                    d3.select("#tooltip1").style("display","inline");
+			mouseover(this,d,json);
+                	var mouse = d3.mouse(svg.node()).map(function(d){ 
+                			return parseInt(d);
+                  	});
+                  	d3.select(this)
+                  		.style("fill","orange");
+                  	if(d.properties.name){
+			/*
+                    		d3.select("#tooltip1")
+                    		.select("#name").text(d.properties.name);
+                    	for(var i =1;i<7;i++){
+                      		d3.select("#tooltip1")
+                      		.select("#t1v"+i.toString())
+                      		.text(d.properties.value[i-1]);
+                    	}
+                    	if(d.properties.number_of_vote == 3){
+                      		for(var i=1;i<3;i++){
+                        		d3.select("#tooltip1")
+                        		.select("#p"+i.toString())
+                        		.style("display","None");
+                      		}
+                    	}
+                    	else{
+                      		for(var i=1;i<3;i++){
+                        		d3.select("#tooltip1")
+                        		.select("#p"+i.toString())
+                        		.style("display","inline-block")
+                      		}
+                    	}
+                    	d3.select("#tooltip1").style("display","inline");
+			*/
                   }
                   else if(d.properties.town){
-                    d3.select("#tooltip2")
-                    .select("#name2")
-                    .text(d.properties.town);
-                    var tv = [];
-                    for(var j=0;j<json.features.length;j++){
-                      if(json.features[j].properties.name == d.properties.county){
-                        tv.push(json.features[j].properties.value[2]);
-                        tv.push(json.features[j].properties.value[3]);
-                        break;
-                      }             
-                    }
-                    for(var i=1;i<3;i++){
-                      d3.select("#tooltip2")
-                      .select("#t2v"+i.toString())
-                      .text(tv[i-1]);
-                    }
-                    d3.select("#tooltip2")
-                    .style("display","inline");
+			/*
+                    	d3.select("#tooltip2")
+                    		.select("#name2")
+                    		.text(d.properties.town);
+                    	var tv = [];
+                    	for(var j=0;j<json.features.length;j++){
+                      		if(json.features[j].properties.name == d.properties.county){
+                        		tv.push(json.features[j].properties.value[2]);
+                        		tv.push(json.features[j].properties.value[3]);
+                        		break;
+                      		}             
+                    	}
+                    	for(var i=1;i<3;i++){
+                      		d3.select("#tooltip2")
+                      		.select("#t2v"+i.toString())
+                      		.text(tv[i-1]);
+                    	}
+                    	d3.select("#tooltip2")
+                    	.style("display","inline");
+			*/
                   }
                 })
-  .on("mouseout",function(d){
-    d3.select(this)
-    .style("fill",function(){
-      if(d.properties.number_of_vote == 3){
-        return color_three;
-      }
-      else if(d.properties.town && islands.indexOf(d.properties.town) == -1){
-        return color_native;
-      }
-      else{
-        return color_five;
-      }
-    });
-    if(d.properties.town){
-      d3.select("#tooltip2")
-      .style("display","None");
-    }
-    else{
-      d3.select("#tooltip1")
-      .style("display","None");
-    }
-  });
+  	.on("mouseout",function(d){
+		mouseout(svg);
+    		d3.select(this)
+    		.style("fill",function(){
+      		if(d.properties.number_of_vote == 3){
+        		return color_three;
+      		}
+      		else if(d.properties.town && islands.indexOf(d.properties.town) == -1){
+        		return color_native;
+      		}
+      		else{
+        		return color_five;
+      		}
+    		});
+    		if(d.properties.town){
+      			d3.select("#tooltip2")
+      			.style("display","None");
+    		}
+    		else{
+      			d3.select("#tooltip1")
+      			.style("display","None");
+    		}
+  	});
 
   svg.selectAll("path")
   .each(function(d){

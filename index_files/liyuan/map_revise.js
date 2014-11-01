@@ -80,6 +80,8 @@ function create_boundary(d,position,name,obj,json){
 		.on("mouseover",function(){
 			d3.select(obj)
 				.style("fill","orange");
+			mouseover(this,d,json);
+			/*
 			if(d.properties.name){
            		         d3.select("#tooltip1")
                 		    .select("#name").text(d.properties.name);
@@ -123,10 +125,12 @@ function create_boundary(d,position,name,obj,json){
                                                 .style("display","inline-block")
                                 }
 				d3.select("#tooltip1").style("display","inline");
-                  }
+                  	}
+		*/
 
 		})
 		.on("mouseout",function(){
+			mouseout(svg);
 			d3.select(obj)
 				.style("fill",function(d){
                         		if(d.properties.number_of_vote == 3){
@@ -141,7 +145,98 @@ function create_boundary(d,position,name,obj,json){
                     		});
 			d3.select("#tooltip1")
 				.style("display","None");
+			d3.select("#tooltip2")
+				.style("display","None");
 		})
 	return 0;
 }
-
+function mouseover(obj,d,json){
+	var coordinates = [0, 0];
+	coordinates = d3.mouse(obj);
+	var x = coordinates[0];
+	var y = coordinates[1];
+	var left = d3.select(obj).position().left;
+	var x1 = (d3.select(obj).position().left + d3.select(obj).position().right +350)/2;
+	var y1 = (d3.select(obj).position().top + d3.select(obj).position().bottom)/2;
+	if((297*left + 97*y1 - 116143) >= 0){
+		x2 = x1 + 120;
+		var tooltip_left = x2 +100;
+	}
+	else{
+		x2 = x1 - 120;
+		var tooltip_left = x2-300 + 100;
+	}
+	y2 = y1-5;
+	var tooltip_top = y2-25;
+	move_up = ['蘭嶼鄉','綠島鄉','琉球鄉'];
+	move_right = ['金門縣'];
+	if(move_up.indexOf(d.properties.town) != -1){
+		tooltip_top = y2-100;
+	}
+	if(move_right.indexOf(d.properties.name) != -1){
+		x2 = x2 +20;
+		tooltip_left = tooltip_left + 20;
+	}
+	//alert(x1.toString()+" "+y1.toString());
+	var line = d3.select("#svg1")
+			.append("line")
+			.attr("x1",x1)
+			.attr("y1",y1-5)
+			.attr("x2",x2)
+			.attr("y2",y2)
+			.attr("stroke","black")
+			.attr("stroke-width",1);
+	if(d.properties.name){
+                                d3.select("#tooltip1")
+				.style("top",tooltip_top + "px")
+				.style("left",tooltip_left + "px")
+                                .select("#name")
+				.text(d.properties.name);
+                        for(var i =1;i<7;i++){
+                                d3.select("#tooltip1")
+                                .select("#t1v"+i.toString())
+                                .text(d.properties.value[i-1]);
+                        }
+                        if(d.properties.number_of_vote == 3){
+                                for(var i=1;i<3;i++){
+                                        d3.select("#tooltip1")
+                                        .select("#p"+i.toString())
+                                        .style("display","None");
+                                }
+                        }
+                        else{
+                                for(var i=1;i<3;i++){
+                                        d3.select("#tooltip1")
+                                        .select("#p"+i.toString())
+                                        .style("display","inline-block")
+                                }
+                        }
+                        d3.select("#tooltip1").style("display","inline");
+        }
+	else if(d.properties.town){
+                        d3.select("#tooltip2")
+				.style("top",tooltip_top + "px")
+                                .style("left",tooltip_left + "px")
+                                .select("#name2")
+                                .text(d.properties.town);
+                        var tv = [];
+                        for(var j=0;j<json.features.length;j++){
+                                if(json.features[j].properties.name == d.properties.county){
+                                        tv.push(json.features[j].properties.value[2]);
+                                        tv.push(json.features[j].properties.value[3]);
+                                        break;
+                                }             
+                        }
+                        for(var i=1;i<3;i++){
+                                d3.select("#tooltip2")
+                                .select("#t2v"+i.toString())
+                                .text(tv[i-1]);
+                        }
+                        d3.select("#tooltip2")
+                        .style("display","inline");
+        }
+}
+function mouseout(svg){
+	svg.selectAll("line")
+		.remove();
+}

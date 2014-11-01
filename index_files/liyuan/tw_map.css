@@ -6,19 +6,21 @@
         right:0px;
         font-size:15px;
         line-height: 10px;
-        background-color:#F4D597;
-        -webkit-border-radius:10px;
-        -moz-border-radius:10px;
+        //background-color:#F4D597;
+        //-webkit-border-radius:10px;
+        //-moz-border-radius:10px;
         border-radius:10px;
         box-shadow:4px 4px 10px rgba(0,0,0,0.4);
         pointer-events:None;
 	display:None;
 }
+
 #map_right{
 	
 	width:370px;
 	height:200px;
 }
+
 
 
 .hidden{
@@ -29,12 +31,14 @@
 	
 	padding:20px;
 }
-#image_explanation{	
-	
+#image_explanation{
 	height:100px;
 	width:260px;
 }
 #image_color{
+	position:relative;
+	top:-350px;
+	left:750px;
 	padding-top:6px;
 	padding-left: 22px;
 	height:90px;
@@ -47,7 +51,9 @@
 	height:20px;
 	width:50px;
 }
+/*
 #svg1 path{
 	stroke:white;
 	stroke-width:0.4px;
 }
+*/
