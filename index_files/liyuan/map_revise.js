@@ -190,14 +190,14 @@ function mouseover(obj,d,json){
 		var tooltip_left = x2-300 + 100;
 	}*/
 	if((solve_result[0]*left + solve_result[1]-y1) <= 0){
-                x2 = x1 + 120;
+                x2 = x + 120;
                 var tooltip_left = x2 +100;
         }
         else{
-                x2 = x1 - 120;
+                x2 = x - 120;
                 var tooltip_left = x2-300 + 100;
         }
-	y2 = y1-5;
+	y2 = y;
 	var tooltip_top = y2-25;
 	move_up = ['蘭嶼鄉','綠島鄉','琉球鄉'];
 	move_right = ['金門縣'];
@@ -211,8 +211,8 @@ function mouseover(obj,d,json){
 	//alert(x1.toString()+" "+y1.toString());
 	var line = d3.select("#svg1")
 			.append("line")
-			.attr("x1",x1)
-			.attr("y1",y1-5)
+			.attr("x1",x)
+			.attr("y1",y)
 			.attr("x2",x2)
 			.attr("y2",y2)
 			.attr("stroke","black")
