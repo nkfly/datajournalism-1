@@ -337,7 +337,8 @@
                           return 0;
                           //alert(d3.select(this).position().top);
                         });
-	svg.attr("transform","scale(1.5,1)");
+	svg.attr("transform","scale(1.5,1)")
+		.style("-webkit-transform","scale(1.5,1)");
 	svg.selectAll("path")
 		.on("mouseover",function(d){
                         mouseover(this,d,json);
