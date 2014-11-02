@@ -174,7 +174,7 @@
     </div>
     <script type="text/javascript">
         //Width and height
-        var w = 700;
+        var w = 1000;
         var h = 550;
         var islands = ['澎湖縣','金門縣','連江縣','綠島鄉','蘭嶼鄉','琉球鄉'];
         var tooltip_top = h-180;
@@ -223,7 +223,7 @@
         //Load in GeoJSON data
         //var bounds = d3.geo.bounds(json);
         //23.978567
-        var prj = d3.geo.mercator().center([120.979531, 24.378567]).scale(6000);
+        var prj = d3.geo.mercator().center([121.879531, 24.378567]).scale(6000);
         var path = d3.geo.path().projection(prj);
         d3.json("./index_files/liyuan/newgeo.json",function(json){
           d3.csv("./index_files/liyuan/選票數.csv",function(data_vote){
@@ -268,7 +268,7 @@
                 .enter()
                 .append("path")
                 .attr("d",path)
-                .attr("transform",transform_function)
+                //.attr("transform",transform_function)
                 .style("fill",function(d){
         		if(d.properties.number_of_vote == 3){
           			return color_three;
@@ -280,7 +280,8 @@
           			return color_five;
         		}
       		})
-                .style("z-index","1")
+                .style("z-index","1");
+		/*
                 .on("mouseover",function(d){
 			mouseover(this,d,json);
                 	var mouse = d3.mouse(svg.node()).map(function(d){ 
@@ -311,9 +312,10 @@
       			d3.select("#tooltip1")
       			.style("display","None");
     		}
-  	});
+  	});*/
 
   svg.selectAll("path")
+  .attr("transform",transform_function)
   .each(function(d){
                           //alert("hihi");
                           var islands = ['澎湖縣','金門縣','連江縣','綠島鄉','蘭嶼鄉','琉球鄉'];
@@ -334,6 +336,39 @@
                           return 0;
                           //alert(d3.select(this).position().top);
                         });
+	svg.attr("transform","scale(1.5,1)");
+	svg.selectAll("path")
+		.on("mouseover",function(d){
+                        mouseover(this,d,json);
+                        var mouse = d3.mouse(svg.node()).map(function(d){ 
+                                        return parseInt(d);
+                        });
+                        d3.select(this)
+                                .style("fill","orange");
+                })
+        .on("mouseout",function(d){
+                mouseout(svg);
+                d3.select(this)
+                .style("fill",function(){
+                if(d.properties.number_of_vote == 3){
+                        return color_three;
+                }
+                else if(d.properties.town && islands.indexOf(d.properties.town) == -1){
+                        return color_native;
+                }
+                else{
+                        return color_five;
+                }
+                });
+                if(d.properties.town){
+                        d3.select("#tooltip2")
+                        .style("display","None");
+                }
+                else{
+                        d3.select("#tooltip1")
+                        .style("display","None");
+                }
+        });
 })
 })
 })

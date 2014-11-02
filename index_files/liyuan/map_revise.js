@@ -32,6 +32,15 @@ function transform_function(d){
 	var centroid = path.centroid(d),
 		x = centroid[0],
                 y = centroid[1];
+	/*
+	if(d.properties.name == "連江縣"){
+		var y2 = y+50;
+		return "translate(" + x + "," + y + ")"
+                + "scale(" + scale + ")"
+                + "translate(" + -x + "," + y + ")";
+
+	}
+	*/
 	return "translate(" + x + "," + y + ")"
                 + "scale(" + scale + ")"
                 + "translate(" + -x + "," + -y + ")";
@@ -196,11 +205,11 @@ function mouseover(obj,d,json){
 	}*/
 	if((solve_result[0]*left + solve_result[1]-y1) <= 0){
                 x2 = x + 120;
-                var tooltip_left = x2 +100;
+                var tooltip_left = x2 +270+100;
         }
         else{
-                x2 = x - 120;
-                var tooltip_left = x2-300 + 100;
+                x2 = x - 100;
+                var tooltip_left = x2-300 + 210;
         }
 	y2 = y;
 	var tooltip_top = y2-25;
@@ -210,8 +219,8 @@ function mouseover(obj,d,json){
 		tooltip_top = y2-100;
 	}
 	if(move_right.indexOf(d.properties.name) != -1){
-		x2 = x2 +20;
-		tooltip_left = tooltip_left + 20;
+		x2 = x2 +60;
+		tooltip_left = tooltip_left ;
 	}
 	//alert(x1.toString()+" "+y1.toString());
 	var line = d3.select("#svg1")
