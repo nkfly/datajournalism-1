@@ -100,11 +100,11 @@ $(document).ready(function(){
 			.hover(function(){
 				var type = $(this).attr("data-type");
 				//$( "img[data-type='"+type+"']" ).removeClass("smallman").addClass("smallman-bigger");
-				$( "img[data-type='"+type+"']" ).css("background-color", "rgb(55,55,55)");
+				$( "img[data-type='"+type+"']" ).css("opacity", "1.0");
 
 			}, function(){
 				var type = $(this).attr("data-type");
-				$( "img[data-type='"+type+"']" ).css("background-color", "transparent");
+				$( "img[data-type='"+type+"']" ).css("opacity", "0.5");
 				//$( "img[data-type='"+type+"']" ).removeClass("smallman-bigger").addClass("smallman");
 			});
 			smallmanId++;
