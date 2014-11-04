@@ -231,7 +231,7 @@
         .call(d3.behavior.zoom()
           .on("zoom", redraw));
         function redraw() {
-          svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+          svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + (d3.event.scale*1.5)+","+ (d3.event.scale) + ")");
         }
         //Load in GeoJSON data
         //var bounds = d3.geo.bounds(json);
