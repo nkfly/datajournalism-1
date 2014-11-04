@@ -227,7 +227,7 @@
         var svg = d3.select("#svg1")
         .attr("width", w)
         .attr("height", h)
-        .append("g");
+        .append("g")
         .call(d3.behavior.zoom()
           .on("zoom", redraw));
         function redraw() {
