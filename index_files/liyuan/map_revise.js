@@ -223,7 +223,7 @@ function mouseover(obj,d,json){
 		tooltip_left = tooltip_left ;
 	}
 	//alert(x1.toString()+" "+y1.toString());
-	var line = d3.select("#svg1")
+	var line = d3.select("#svg1 g")
 			.append("line")
 			.attr("x1",x)
 			.attr("y1",y)
