@@ -293,38 +293,7 @@
         		}
       		})
                 .style("z-index","1");
-		/*
-                .on("mouseover",function(d){
-			mouseover(this,d,json);
-                	var mouse = d3.mouse(svg.node()).map(function(d){ 
-                			return parseInt(d);
-                  	});
-                  	d3.select(this)
-                  		.style("fill","orange");
-                })
-  	.on("mouseout",function(d){
-		mouseout(svg);
-    		d3.select(this)
-    		.style("fill",function(){
-      		if(d.properties.number_of_vote == 3){
-        		return color_three;
-      		}
-      		else if(d.properties.town && islands.indexOf(d.properties.town) == -1){
-        		return color_native;
-      		}
-      		else{
-        		return color_five;
-      		}
-    		});
-    		if(d.properties.town){
-      			d3.select("#tooltip2")
-      			.style("display","None");
-    		}
-    		else{
-      			d3.select("#tooltip1")
-      			.style("display","None");
-    		}
-  	});*/
+		
 
   svg.selectAll("path")
   .attr("transform",transform_function)
