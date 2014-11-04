@@ -37,7 +37,7 @@
 }
 #image_color{
 	position:relative;
-	top:-350px;
+	top:-250px;
 	left:750px;
 	padding-top:6px;
 	padding-left: 22px;
@@ -53,7 +53,6 @@
 }
 #svg1{
 	position:relative;
-	left:100px;
 	margin: 0px auto;
 }
 /*

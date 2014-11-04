@@ -74,6 +74,22 @@ function animateSmallmanRatio(){
 
 }
 
+function smallman_hoverin(){
+	var type = $(this).attr("data-type");
+				//$( "img[data-type='"+type+"']" ).removeClass("smallman").addClass("smallman-bigger");
+	$( "#smallman-graph>img" ).css("opacity", "0.1");
+	$( "img[data-type='"+type+"']" ).css("opacity", "1.0");
+
+}
+
+function smallman_hoverout(){
+	var type = $(this).attr("data-type");
+	$( "img[data-type='"+type+"']" ).css("opacity", "0.5");
+	//$( "img[data-type='"+type+"']" ).css("opacity", "0.5")
+	//$( "img[data-type='"+type+"']" ).removeClass("smallman-bigger").addClass("smallman");
+
+}
+
 
 $(document).ready(function(){
 	resetSmallRatioImage();
@@ -97,16 +113,7 @@ $(document).ready(function(){
     'selector': '',
     'placement': 'top',
     'container':'body'})
-			.hover(function(){
-				var type = $(this).attr("data-type");
-				//$( "img[data-type='"+type+"']" ).removeClass("smallman").addClass("smallman-bigger");
-				$( "img[data-type='"+type+"']" ).css("opacity", "1.0");
-
-			}, function(){
-				var type = $(this).attr("data-type");
-				$( "img[data-type='"+type+"']" ).css("opacity", "0.5");
-				//$( "img[data-type='"+type+"']" ).removeClass("smallman-bigger").addClass("smallman");
-			});
+			.hover(smallman_hoverin, smallman_hoverout);
 			smallmanId++;
 		}
 	}
