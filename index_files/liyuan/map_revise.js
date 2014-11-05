@@ -92,8 +92,8 @@ function create_boundary(d,position,name,obj,json){
 		//.attr('stroke-dasharray', '10,5')
 		.on("mouseover",function(){
 			d3.select(obj)
-				.style("opacity","1.0")
-				.style("fill","orange");
+				.style("opacity","1.0");
+				//.style("fill","orange");
 			mouseover(this,d,json);
 
 		})
