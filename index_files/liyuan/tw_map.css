@@ -32,11 +32,13 @@
 	padding:20px;
 }
 #image_explanation{
+	position:absolute;
 	height:100px;
 	width:260px;
+	z-index : 1;
 }
 #image_color{
-	position:relative;
+	position:absolute;
 	top:-250px;
 	left:750px;
 	padding-top:6px;
@@ -53,6 +55,7 @@
 }
 #svg1{
 	position:relative;
+	z-index : 3;
 }
 /*
 #svg1 path{

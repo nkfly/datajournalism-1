@@ -78,6 +78,7 @@ function create_boundary(d,position,name,obj,json){
 		x = centroid[0],
 		y = centroid[1];
 	var xmid = x-(position.right + position.left)/2;
+	
 	svg.append("rect")
 		.attr("x",x-width/2)
 		.attr("y",y-height/2)
@@ -87,10 +88,11 @@ function create_boundary(d,position,name,obj,json){
 		.attr("height",height)
 		.style("z-index","3")
 		.style("fill","transparent")
-		.style("stroke","black")
-		.attr('stroke-dasharray', '10,5')
+		//.style("stroke","black")
+		//.attr('stroke-dasharray', '10,5')
 		.on("mouseover",function(){
 			d3.select(obj)
+				.style("opacity","1.0")
 				.style("fill","orange");
 			mouseover(this,d,json);
 
@@ -98,6 +100,7 @@ function create_boundary(d,position,name,obj,json){
 		.on("mouseout",function(){
 			mouseout(svg);
 			d3.select(obj)
+				.style("opacity","0.5")
 				.style("fill",function(d){
                         		if(d.properties.number_of_vote == 3){
                           			return color_three;

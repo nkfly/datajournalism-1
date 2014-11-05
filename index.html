@@ -167,8 +167,8 @@
         <p>鄉(鎮、市)長/原住民區長：<span id="t2v1"></span></p>
         <p>鄉(鎮、市)民代表/原住民區民代表：<span id="t2v2"></span></p>
       </div>
-	</svg>
-      <div style="position:absolute;left:270px;bottom:0px;"id="image_explanation">
+	
+      <div style="position:absolute;left:270px;top:370px;"id="image_explanation">
         <div id="image_color">
           <div id ="sample1" class = "color_sample"></div>
           五張選票<br>
@@ -178,7 +178,7 @@
           山地原住民五張選票  
         </div>
       </div>
-      
+      </svg>
 
 
       <div style="clear:both;"id = "under_map" class="text_area">
@@ -200,11 +200,11 @@
         var color_three = "#E2244A";
         var color_native = "#BB009A";
         d3.select("#tooltip1")
-        .style("z-index","1")
+        .style("z-index","3")
         .style("top",tooltip_top + "px")
         .style("left",w+"px");
         d3.select("#tooltip2")
-        .style("z-index","1")
+        .style("z-index","3")
         .style("top",tooltip_top + "px")
         .style("left",w+"px");
         d3.select("#map_right")
@@ -214,12 +214,19 @@
         d3.select("#under_map")
         .style("z-index","2")
         .style("top",h+"px");
+	/*
         d3.select("#image_explanation")
         .style("top",color_top+"px");
+	*/
         d3.select("#sample1")
+	.style("opacity","0.5")
         .style("background-color",color_five);
-        d3.select("#sample2").style("background-color",color_three);
-        d3.select("#sample3").style("background-color",color_native);
+        d3.select("#sample2")
+	.style("opacity","0.5")
+	.style("background-color",color_three);
+        d3.select("#sample3")
+	.style("opacity","0.5")
+	.style("background-color",color_native);
         //Define default path generator
 
         //Create SVG element
@@ -280,6 +287,7 @@
                 .enter()
                 .append("path")
                 .attr("d",path)
+		.style("opacity","0.5")
                 //.attr("transform",transform_function)
                 .style("fill",function(d){
         		if(d.properties.number_of_vote == 3){
@@ -327,11 +335,13 @@
                                         return parseInt(d);
                         });
                         d3.select(this)
+				.style("opacity","1.0")
                                 .style("fill","orange");
                 })
         .on("mouseout",function(d){
                 mouseout(svg);
                 d3.select(this)
+		.style("opacity","0.5")
                 .style("fill",function(){
                 if(d.properties.number_of_vote == 3){
                         return color_three;
