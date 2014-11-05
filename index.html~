@@ -292,7 +292,7 @@
           			return color_five;
         		}
       		})
-                .style("z-index","3");
+                .style("z-index","2");
 		
 
   svg.selectAll("path")

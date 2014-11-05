@@ -85,7 +85,6 @@ function create_boundary(d,position,name,obj,json){
 		//.attr("y",y_pos)
 		.attr("width",width)
 		.attr("height",height)
-		.style("z-index","3")
 		.style("fill","transparent")
 		.style("stroke","black")
 		.attr('stroke-dasharray', '10,5')
@@ -93,6 +92,52 @@ function create_boundary(d,position,name,obj,json){
 			d3.select(obj)
 				.style("fill","orange");
 			mouseover(this,d,json);
+			/*
+			if(d.properties.name){
+           		         d3.select("#tooltip1")
+                		    .select("#name").text(d.properties.name);
+                    	for(var i =1;i<7;i++){
+          			d3.select("#tooltip1")
+                        	.select("#t1v"+i.toString())
+                        	.text(d.properties.value[i-1]);
+                    	}
+                    	if(d.properties.number_of_vote == 3){
+                      		for(var i=1;i<3;i++){
+                        	d3.select("#tooltip1")
+                          	.select("#p"+i.toString())
+                          	.style("display","None");
+                      		}
+                    	}
+                    	else{
+                      		for(var i=1;i<3;i++){
+                        		d3.select("#tooltip1")
+                          			.select("#p"+i.toString())
+                          			.style("display","inline-block")
+                      		}
+                    	}
+                    	d3.select("#tooltip1").style("display","inline");
+                  	}
+                  	else if(d.properties.town){
+				for(var j=0;j<json.features.length;j++){
+                                	if(json.features[j].properties.name == d.properties.county){
+						d3.select("#tooltip1")
+                                    			.select("#name").text(d.properties.town);
+						for(var i =1;i<7;i++){
+                                			d3.select("#tooltip1")
+                                			.select("#t1v"+i.toString())
+                                			.text(json.features[j].properties.value[i-1]);
+                        			}	
+                                        	break;
+                                	}             
+                        	}
+				for(var i=1;i<3;i++){
+                                        d3.select("#tooltip1")
+                                                .select("#p"+i.toString())
+                                                .style("display","inline-block")
+                                }
+				d3.select("#tooltip1").style("display","inline");
+                  	}
+		*/
 
 		})
 		.on("mouseout",function(){
@@ -150,31 +195,35 @@ function mouseover(obj,d,json){
 	var x1 = (d3.select(obj).position().left + d3.select(obj).position().right +350)/2;
 	var y1 = (d3.select(obj).position().top + d3.select(obj).position().bottom)/2;
 	var solve_result = find_line(svg);
-	
+	//alert(solve_result);
+	/*
+	if((297*left + 97*y1 - 116143) >= 0){
+		x2 = x1 + 120;
+		var tooltip_left = x2 +100;
+	}
+	else{
+		x2 = x1 - 120;
+		var tooltip_left = x2-300 + 100;
+	}*/
 	if((solve_result[0]*left + solve_result[1]-y1) <= 0){
-                x2 = x + 80;
-                var tooltip_left = x2*1.5; //+270/1.5;//*1.5;//+100;
+                x2 = x + 120;
+                var tooltip_left = x2 +270+100;
         }
         else{
-                x2 = x - 80;
-                var tooltip_left = x2*1.5-300;//*1.5; //+ 210;
+                x2 = x - 100;
+                var tooltip_left = x2-300 + 210;
         }
 	y2 = y;
 	var tooltip_top = y2-25;
 	move_up = ['蘭嶼鄉','綠島鄉','琉球鄉'];
 	move_right = ['金門縣'];
-	move_down = ['連江縣'];
 	if(move_up.indexOf(d.properties.town) != -1){
-		tooltip_top = y2-50;
+		tooltip_top = y2-100;
 	}
 	if(move_right.indexOf(d.properties.name) != -1){
-		x2 = x + 80 ; 
-		tooltip_left = x2*1.5;
+		x2 = x2 +60;
+		tooltip_left = tooltip_left ;
 	}
-	if(move_down.indexOf(d.properties.name) != -1){
-                tooltip_top = y2+50;
-        }
-
 	//alert(x1.toString()+" "+y1.toString());
 	var line = d3.select("#svg1 g")
 			.append("line")
