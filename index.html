@@ -39,7 +39,7 @@
 
     googlemap = new google.maps.Map(document.getElementById('map-canvas'), {
       center: taiwan,
-      zoom: 7
+      zoom: 8
     });
 
     layer = new google.maps.FusionTablesLayer({
@@ -54,18 +54,22 @@
     layer.setMap(googlemap);
     google.maps.event.addListener(googlemap, 'zoom_changed', function() {
       var zoomLevel = googlemap.getZoom();
+
+      if( zoomLevel < 8 ) {
+        googlemap.setZoom(8);
+      }
+
       if( zoomLevel > 10 ) {
         layer.setOptions({
           styles: [{
             markerOptions: {
-              iconName: 'small_red'
+              iconName: 'small_yellow'
             }
           }],
           heatmap: {
             enabled: false
           }
         });
-        
       } else {
         layer.setOptions({
           heatmap: {
@@ -73,6 +77,33 @@
           }
         });
       } 
+    });
+    google.maps.event.addListener(googlemap, 'bounds_changed', function(){
+      var bounds = googlemap.getBounds();
+      var leftBound = 117.99099616796877;
+      var rightBound = 127;
+      console.log('bounds:'+bounds.getSouthWest()+','+bounds.getNorthEast());
+
+      if( bounds.getSouthWest().lng() < leftBound ){
+        var originSW = bounds.getSouthWest();
+        var originNE = bounds.getNorthEast();
+        var diff = leftBound - bounds.getSouthWest().lng();
+        var newBounds = new google.maps.LatLngBounds(
+          new google.maps.LatLng(originSW.lat(), leftBound),
+          new google.maps.LatLng(originNE.lat(), originNE.lng()+diff)
+        );
+        googlemap.setCenter(newBounds.getCenter());
+      }
+      else if( bounds.getNorthEast().lng() > rightBound ){
+        var originSW = bounds.getSouthWest();
+        var originNE = bounds.getNorthEast();
+        var diff = bounds.getNorthEast().lng() - rightBound;
+        var newBounds = new google.maps.LatLngBounds(
+          new google.maps.LatLng(originSW.lat(), originSW.lng()-diff),
+          new google.maps.LatLng(originNE.lat(), rightBound)
+        ); 
+        googlemap.setCenter(newBounds.getCenter());
+      }
     });
 
 
