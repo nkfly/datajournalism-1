@@ -183,9 +183,9 @@
 
       <div style="clear:both;"id = "under_map" class="text_area">
         <h2 class="banner">從七合一選舉到九合一選舉 原住民爭取自治</h2>
-        <p style="color:white;margin:0px;background-color:#CB624F;">山地原住民區在2010年五都改制後，五個原住民鄉鎮包括烏來、和平、那瑪夏、茂林及桃源合併變成直轄市的區，由於直轄市區長為官派，依法不再實施自治。當時新上路的《地方制度法》遂因此受到原住民族與公民團體質疑，認為此舉將違反聯合國及馬英九2008年競選政見對原住民自治權的承諾。最後在當地原住民爭取下，立院於今（2014）年1月三讀通過，直轄市下轄區由山地鄉改制者，改稱「山地原住民區」，恢復區長、區代表選舉，並享相關地方自治權限。</p>
-        <p style="color:white;margin:0px;background-color:#CB624F;">而經過立法院三讀通過公職人員選舉罷免法修正案後，增列「直轄市山地原住民區民代表」及「直轄市山地原住民區長」兩個地方公職人員。年底地方選舉也才從七合一選舉，變成了九合一選舉。</p>
-        <p style="color:white;margin:0px;background-color:#CB624F;">依103年5月28日修正公布之公職人員選舉罷免法第2條規定，地方公職人員選舉包括直轄市長、直轄市議員、縣(市)長、縣(市)議員、鄉(鎮、市)長、鄉(鎮、市)民代表、直轄市山地原住民區長、直轄市山地原住民區民代表及村(里)長選舉等9種。</p>
+        <p style="padding-left:20px;padding-right:20px;padding-bottom:30px;color:white;margin:0px;background-color:#CB624F;">山地原住民區在2010年五都改制後，五個原住民鄉鎮包括烏來、和平、那瑪夏、茂林及桃源合併變成直轄市的區，由於直轄市區長為官派，依法不再實施自治。當時新上路的《地方制度法》遂因此受到原住民族與公民團體質疑，認為此舉將違反聯合國及馬英九2008年競選政見對原住民自治權的承諾。最後在當地原住民爭取下，立院於今（2014）年1月三讀通過，直轄市下轄區由山地鄉改制者，改稱「山地原住民區」，恢復區長、區代表選舉，並享相關地方自治權限。</p>
+        <p style="padding-left:20px;padding-right:20px;padding-bottom:30px;color:white;margin:0px;background-color:#CB624F;">而經過立法院三讀通過公職人員選舉罷免法修正案後，增列「直轄市山地原住民區民代表」及「直轄市山地原住民區長」兩個地方公職人員。年底地方選舉也才從七合一選舉，變成了九合一選舉。</p>
+        <p style="padding-left:20px;padding-right:20px;padding-bottom:30px;color:white;margin:0px;background-color:#CB624F;">依103年5月28日修正公布之公職人員選舉罷免法第2條規定，地方公職人員選舉包括直轄市長、直轄市議員、縣(市)長、縣(市)議員、鄉(鎮、市)長、鄉(鎮、市)民代表、直轄市山地原住民區長、直轄市山地原住民區民代表及村(里)長選舉等9種。</p>
       </div>
     </div>
     <script type="text/javascript">
@@ -367,13 +367,19 @@
 })
   </script>
   <div class="caption">
-    <h2>台灣各地投票所位置查詢</h2>
-    <div id="map-canvas" style="height: 500px;margin: 0px;padding: 0px"></div>
-    <form onSubmit="return codeAddress();" action="" role="form" class="form-inline">
+    <h2 style="margin:0px;
+      color:#CB624F;
+      text-align: center;
+      padding-top: 30px;
+      padding-bottom: 30px;
+      font-size:30px;">台灣各地投票所位置查詢</h2>
+    <form onSubmit="return codeAddress();" action="" role="form" class="form-inline" style="text-align:center;margin-bottom:30px">
       <input type="text" id="address" placeholder="請輸入你的戶籍地址" class="form-control"></input>
-      <button type="submit" class="btn btn-success">送出</button>
-      <span style="color:red">註:因為中選會資料格式有誤，目前南投地區並無資料。</span>
+      <button style="background-color:#CB624F;border:0px;"type="submit" class="btn btn-success">送出</button>
+      <div style="color:grey;font-size:12px;">註:因為中選會資料格式有誤，目前南投地區並無資料。</div>
     </form>
+    <div id="map-canvas" style="height: 500px;margin: 0px;padding: 0px"></div>
+    
   </div>
 </div>		
 </body>

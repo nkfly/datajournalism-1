@@ -83,8 +83,7 @@ function smallman_hoverin(){
 }
 
 function smallman_hoverout(){
-	var type = $(this).attr("data-type");
-	$( "img[data-type='"+type+"']" ).css("opacity", "0.5");
+	$( "#smallman-graph>img" ).css("opacity", "0.5");
 	//$( "img[data-type='"+type+"']" ).css("opacity", "0.5")
 	//$( "img[data-type='"+type+"']" ).removeClass("smallman-bigger").addClass("smallman");
 
