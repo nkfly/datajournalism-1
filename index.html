@@ -265,9 +265,11 @@
         var svg = d3.select("#svg1")
         .attr("width", w)
         .attr("height", h)
-        .append("g")
+        .append("g");
+        /*
         .call(d3.behavior.zoom()
           .on("zoom", redraw));
+          */
         function redraw() {
           svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + (d3.event.scale*1.5)+","+ (d3.event.scale) + ")");
         }
