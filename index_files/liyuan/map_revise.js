@@ -155,7 +155,7 @@ function mouseover(obj,d,json){
 	var solve_result = find_line(svg);
 	
 	if((solve_result[0]*left + solve_result[1]-y1) <= 0){
-                x2 = x + 80;
+                x2 = x + 50;
                 var tooltip_left = x2*1.5; //+270/1.5;//*1.5;//+100;
         }
         else{
