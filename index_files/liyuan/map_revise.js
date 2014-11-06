@@ -169,6 +169,7 @@ function mouseover(obj,d,json){
 	move_down = ['連江縣'];
 	if(move_up.indexOf(d.properties.town) != -1){
 		tooltip_top = y2-50;
+		x2 = x2 - 20;
 		tooltip_left = tooltip_left -20;
 	}
 	if(move_right.indexOf(d.properties.name) != -1){
