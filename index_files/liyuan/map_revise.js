@@ -159,19 +159,24 @@ function mouseover(obj,d,json){
                 var tooltip_left = x2*1.5; //+270/1.5;//*1.5;//+100;
         }
         else{
-                x2 = x - 80;
+                x2 = x - 50;
                 var tooltip_left = x2*1.5-300;//*1.5; //+ 210;
         }
 	y2 = y;
 	var tooltip_top = y2-25;
 	move_up = ['蘭嶼鄉','綠島鄉','琉球鄉'];
 	move_right = ['金門縣'];
+	move_left = ['澎湖縣'];
 	move_down = ['連江縣'];
 	if(move_up.indexOf(d.properties.town) != -1){
 		tooltip_top = y2-50;
 		x2 = x2 - 20;
 		tooltip_left = tooltip_left -20*1.5;
 	}
+	if(move_left.indexOf(d.properties.name) != -1){
+                x2 = x2 + 20 ;
+                tooltip_left = tooltip_left + 20*1.5;
+        }
 	if(move_right.indexOf(d.properties.name) != -1){
 		x2 = x + 80 ; 
 		tooltip_left = x2*1.5;

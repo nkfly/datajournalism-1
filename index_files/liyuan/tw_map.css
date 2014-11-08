@@ -37,9 +37,7 @@
 	z-index : 1;
 }
 #image_color{
-	position:absolute;
-	top:-250px;
-	left:750px;
+	
 	padding-top:6px;
 	padding-left: 22px;
 	height:90px;
@@ -52,7 +50,6 @@
 	width:50px;
 }
 #svg1{
-	position:relative;
 	z-index : 3;
 }
 /*

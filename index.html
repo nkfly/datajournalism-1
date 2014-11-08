@@ -200,7 +200,7 @@
         <p>鄉(鎮、市)民代表/原住民區民代表：<span id="t2v2"></span></p>
       </div>
 	
-      <div style="position:absolute;left:20%;top:750px;"id="image_explanation">
+      <div style="position:absolute;"id="image_explanation">
         <div id="image_color">
           <div id ="sample1" class = "color_sample"></div>
           五張選票<br>
@@ -225,31 +225,22 @@
         var w = $("div.container").width();
         var h = 550;
         var islands = ['澎湖縣','金門縣','連江縣','綠島鄉','蘭嶼鄉','琉球鄉'];
-        var tooltip_top = h-180;
-        var map_right_top = h-180-200;
-        var color_top = h-180;
+        
         var color_five = "#FA8722";
         var color_three = "#E2244A";
         var color_native = "#BB009A";
+	
+	d3.select("#image_explanation")
+		.style("top",(h-50)+"px")
+		.style("left",(w-260) + "px");
         d3.select("#tooltip1")
-        .style("z-index","3")
-        .style("top",tooltip_top + "px")
-        .style("left",w+"px");
+        .style("z-index","3");
         d3.select("#tooltip2")
-        .style("z-index","3")
-        .style("top",tooltip_top + "px")
-        .style("left",w+"px");
-        d3.select("#map_right")
-        .style("z-index","2")
-        .style("top",map_right_top+"px")
-        .style("left",w+"px");
+        .style("z-index","3");
         d3.select("#under_map")
         .style("z-index","2")
         .style("top",h+"px");
-	/*
-        d3.select("#image_explanation")
-        .style("top",color_top+"px");
-	*/
+	
         d3.select("#sample1")
 	.style("opacity","0.5")
         .style("background-color",color_five);
@@ -276,7 +267,7 @@
         //Load in GeoJSON data
         //var bounds = d3.geo.bounds(json);
         //23.978567
-        var prj = d3.geo.mercator().center([121.279531, 24.378567]).scale(6000);
+        var prj = d3.geo.mercator().center([121.879531, 24.378567]).scale(6000);
         var path = d3.geo.path().projection(prj);
         d3.json("./index_files/liyuan/newgeo.json",function(json){
           d3.csv("./index_files/liyuan/選票數.csv",function(data_vote){
