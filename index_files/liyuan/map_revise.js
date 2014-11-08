@@ -49,8 +49,9 @@ d3.selection.prototype.position = function() {
     var el = this.node();
     var elPos = el.getBoundingClientRect();
     var vpPos = getVpPos(el);
-	alert("test3");
+	
     function getVpPos(el) {
+    	alert("test3");
         if(el.parentElement.tagName === 'svg') {
             return el.parentElement.getBoundingClientRect();
         }
