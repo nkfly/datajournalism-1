@@ -332,7 +332,6 @@
   svg.selectAll("path")
   .attr("transform",transform_function)
   .each(function(d){
-                          alert("hihi");
                           var islands = ['澎湖縣','金門縣','連江縣','綠島鄉','蘭嶼鄉','琉球鄉'];
                           var name;
                           if(d.properties.name){
@@ -351,6 +350,7 @@
                           return 0;
                           //alert(d3.select(this).position().top);
                         });
+        alert("test");
         svg.attr("transform","scale(1.5,1)" );
 	//svg.attr("transform","translate(121.579531,24.378567)"+"scale(1.5,1)" + "translate(-121.579531,-24.378567)");
 		//.style("-webkit-transform","translate(122.579531,24.378567)"+"scale(1.5,1)" + "translate(-122.579531,-24.378567)");
