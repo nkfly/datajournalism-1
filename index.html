@@ -231,7 +231,7 @@
         var color_native = "#BB009A";
 	
 	d3.select("#image_explanation")
-		.style("top",(h-50)+"px")
+		.style("top",(h-30)+"px")
 		.style("left","10px");
         d3.select("#tooltip1")
         .style("z-index","3");
@@ -268,7 +268,7 @@
         //Load in GeoJSON data
         //var bounds = d3.geo.bounds(json);
         //23.978567
-        var prj = d3.geo.mercator().center([121.379531, 24.378567]).scale(6000);
+        var prj = d3.geo.mercator().center([121.479531, 24.378567]).scale(6000);
         var path = d3.geo.path().projection(prj);
         d3.json("./index_files/liyuan/newgeo.json",function(json){
           d3.csv("./index_files/liyuan/選票數.csv",function(data_vote){
