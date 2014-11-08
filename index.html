@@ -345,7 +345,7 @@
                           }
                           //alert("wtf");
                           if(islands.indexOf(name) != -1){
-                            alert(d3.select(this).position());
+                            d3.select(this).position();
                             create_boundary(d,d3.select(this).position(),name,this,json);
                           }
                           return 0;
