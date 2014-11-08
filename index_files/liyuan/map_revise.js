@@ -47,8 +47,8 @@ function transform_function(d){
 }
 d3.selection.prototype.position = function() {
     var el = this.node();
-    	alert("test2");
     var elPos = el.getBoundingClientRect();
+    alert("test2");
     var vpPos = getVpPos(el);
 
     function getVpPos(el) {
