@@ -51,13 +51,13 @@ d3.selection.prototype.position = function() {
     var vpPos = getVpPos(el);
 	
     function getVpPos(el) {
-    	var parent = el.parentNode;
-    	alert(parent);
-        if(el.parentElement.tagName === 'svg') {
+    	//var parent = el.parentNode;
+    	//alert(parent);
+        if(el.parentNode.tagName === 'svg') {
         	//alert("test3");
-            return el.parentElement.getBoundingClientRect();
+            return el.parentNode.getBoundingClientRect();
         }
-        return getVpPos(el.parentElement);
+        return getVpPos(el.parentNode);
     }
 
     return {
