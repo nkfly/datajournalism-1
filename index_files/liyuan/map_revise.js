@@ -46,7 +46,7 @@ function transform_function(d){
                 + "translate(" + -x + "," + -y + ")";
 }
 d3.selection.prototype.position = function() {
-
+	alert("test");
     var el = this.node();
     var elPos = el.getBoundingClientRect();
     var vpPos = getVpPos(el);
